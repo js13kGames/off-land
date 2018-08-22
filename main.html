@@ -17,7 +17,10 @@
 
     let levelConfig = {
         width:  800,
-        height:  600
+        height:  600,
+        life: 5,
+        shield: 0,
+        framesPerSecond: 60
     };
 
     let aiConfig = {
@@ -54,6 +57,7 @@
 
     function AIElement(x, y, h, w){
         this.e = new Element (x, y, h, w);
+        this.safe = 0;
        var getRandomSign = function () {
            return Math.random() < 0.5 ? -1 : 1;
         };
@@ -125,10 +129,9 @@
 
         init();
 
-        var framesPerSecond = 60;
         setInterval(function() {
             drawEverything();
-        }, 1000/framesPerSecond);
+        }, 1000/levelConfig.framesPerSecond);
 
         canvas.addEventListener('mousemove',
             function(evt) {
@@ -145,13 +148,13 @@
 
         // this is player
         colorRect(player.x,player.y,player.w,player.h,'white');
-
-        checkFoodCollition();
+        levelConfig.shield--;
+        checkFoodCollision();
         //this is food
         drawFood();
 
         drawAI();
-
+        showLife();
         if(levelDone())
             showLevelDone();
 
@@ -160,7 +163,11 @@
     function drawAI(){
         for(var i = 0; i < ai.length; i++){
             var a = ai[i];
-            a.move();  a.e.relocate();
+            a.move();  a.e.relocate();a.safe--;
+            if(levelConfig.shield <= 0 && a.safe <= 0 && checkCollision(a.e, player)){
+               a.safe = levelConfig.framesPerSecond;
+                levelConfig.life--;
+            }
             canvasContext.drawImage(aiImg, a.e.x, a.e.y, a.e.w, a.e.h);
         }
     }
@@ -173,7 +180,7 @@
     }
 
     function levelDone(){
-        if (food.length === 0)
+        if (levelConfig.life <= 0 || food.length === 0)
             return true
     }
 
@@ -181,22 +188,26 @@
         canvasContext.fillText("click to continue", 350, 500);
     }
 
-    function checkCollition(item1, item2){
-        if(axisCollition(item1.x, item1.xw, item2.x, item2.xw)
-            && axisCollition(item1.y, item1.yh, item2.y, item2.yh) )
+    function showLife(){
+        canvasContext.fillText("Life " + levelConfig.life, 25, 500);
+    }
+
+    function checkCollision(item1, item2){
+        if(axisCollision(item1.x, item1.xw, item2.x, item2.xw)
+            && axisCollision(item1.y, item1.yh, item2.y, item2.yh) )
             return true;
     }
 
-    function axisCollition(item1px1, item1px2, item2px1, item2px2){
+    function axisCollision(item1px1, item1px2, item2px1, item2px2){
         return (item1px1 > item2px1 && item1px1 < item2px2  )
             ||  (item1px2 >item2px1  && item1px2 <  item2px2)
             ||  (item2px1 >item1px1  && item2px1<  item1px2);
     }
 
-    function checkFoodCollition(){
+    function checkFoodCollision(){
         var i  = food.length;
         while (i--) {
-            if (checkCollition(food[i], player)) {
+            if (checkCollision(food[i], player)) {
                 food.splice(i, 1);
             }
         }
