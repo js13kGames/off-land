@@ -1,4 +1,4 @@
-function AIElement(x, y, h, w) {
+function AI(x, y, h, w) {
     this.e = new Element(x, y, h, w);
     this.safe = 0;
     var getRandomSign = function () {
@@ -15,10 +15,10 @@ function AIElement(x, y, h, w) {
     };
 
     this.changeDirection = function () {
-        if (this.e.xw >= level.config.width || this.e.xw <= 0)
+        if (this.e.xw >= CONFIG.screen.w || this.e.x <= 0)
             this.direction.x = -this.direction.x;
 
-        if (this.e.yh >= level.config.height || this.e.yh <= 0)
+        if (this.e.yh >= CONFIG.screen.h || this.e.y <= 0)
             this.direction.y = -this.direction.y;
     }
 }

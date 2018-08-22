@@ -3,9 +3,9 @@ function random(max) {
 }
 
 function generate(item, space, itemObj) {
-    for (let i = 0; i < item.qty; i++) {
-        var x = random(space.width - item.width);
-        var y = random(space.height - item.height);
+    for (var i = 0; i < item.qty; i++) {
+        var x = random(space.w - item.width);
+        var y = random(space.h - item.height);
         item.list.push(new itemObj(x, y, item.width, item.height));
     }
 }

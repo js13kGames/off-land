@@ -15,6 +15,8 @@ function colorRect(x,y, w,h, drawColor) {
 }
 
 function displayText(txt, x, y){
+    canvasContext.font="20px Georgia";
+    canvasContext.fillStyle = "white";
     canvasContext.fillText(txt, x, y);
 }
 
@@ -23,5 +25,5 @@ function displayImage(img, x, y, w, h){
 }
 
 function textTimes(txt, times){
-    return new Array( times + 1 ).join( txt );
+    return (times > 0) ? new Array( times + 1 ).join( txt ) : "";
 }

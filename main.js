@@ -1,80 +1,105 @@
 var canvas;
 var canvasContext;
-let level;
-let player ;
-let game;
+var level;
+var player;
+var game;
 
-window.onload = function() {
+window.onload = function () {
     game = new Game();
     game.start();
 
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
 
-    setInterval(function() {
-        drawEverything();
-    }, 1000/level.config.framesPerSecond);
+    setInterval(function () {
+        drawGame();
+    }, 1000 / CONFIG.framesPerSecond);
 
     canvas.addEventListener('mousemove',
-        function(e) {
-            let pos = calculateMousePos(e);
-            player.move(pos.x, pos.y);
+        function (e) {
+            var pos = calculateMousePos(e);
+            player.e.move(pos.x, pos.y);
         });
 };
 
-function drawEverything() {
+function drawGame() {
     // next line blanks out the screen with black
-    colorRect(0,0,canvas.width,canvas.height,'black');
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
 
-    // this is player
-    colorRect(player.x,player.y,player.w,player.h,'white');
-    level.config.shield--;
+    displayImage(player.getSkin(), player.e.x, player.e.y, player.e.w, player.e.h);
+
+    player.reduceShield(0.1);
     checkFoodCollision();
-    //this is food
+    checkShieldCollision();
     drawFood();
-
+    drawShield();
     drawAI();
 
     game.showStats();
 
-    if(levelDone())
+    if (levelDone())
         showLevelDone();
 
+    if (game.hasLost())
+        showLost();
 }
 
-function drawAI(){
-    for(var i = 0; i < level.ai.list.length; i++){
+function drawAI() {
+    for (var i = 0; i < level.ai.list.length; i++) {
         var a = level.ai.list[i];
         a.move();
-        if(level.config.shield <= 0 && a.safe <= 0 && checkCollision(a.e, player)){
-            a.safe = level.config.framesPerSecond;
-            level.config.life--;
+        if (player.shield <= 0 && a.safe <= 0 && checkCollision(a.e, player.e)) {
+            a.safe = CONFIG.framesPerSecond / 2;
+            game.life--;
         }
         displayImage(level.ai.img, a.e.x, a.e.y, a.e.w, a.e.h);
     }
 }
 
-function drawFood(){
-    for(var i = 0; i < level.food.list.length; i++){
+function drawFood() {
+    for (var i = 0; i < level.food.list.length; i++) {
         var f = level.food.list[i];
         displayImage(level.food.img, f.x, f.y, f.w, f.h);
     }
 }
 
-function levelDone(){
-    if (level.config.life <= 0 || level.food.list.length === 0)
+function drawShield() {
+    if (level.shield.list.length <= CONFIG.max && random(CONFIG.shield.chance) < 2)
+        generate(level.shield, CONFIG, Element);
+
+    for (var i = 0; i < level.shield.list.length; i++) {
+        var s = level.shield.list[i];
+        displayImage(level.shield.img, s.x, s.y, s.w, s.h);
+    }
+};
+
+function levelDone() {
+    if (level.food.list.length === 0)
         return true
 }
 
-function showLevelDone(){
+function showLevelDone() {
     game.nextLevel();
 }
 
-function checkFoodCollision(){
-    var i  = level.food.list.length;
+function showLost() {
+    game.restart();
+}
+
+function checkFoodCollision() {
+    removeElementIfCollision(level.food);
+}
+
+function checkShieldCollision() {
+    removeElementIfCollision(level.shield)
+}
+
+function removeElementIfCollision(item) {
+    var i = item.list.length;
     while (i--) {
-        if (checkCollision(level.food.list[i], player)) {
-            level.food.list.splice(i, 1);
+        if (checkCollision(item.list[i], player.e)) {
+            item.list.splice(i, 1);
+            item.onCollision();
         }
     }
 }

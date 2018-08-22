@@ -1,39 +1,48 @@
 function Level(num){
     this.lvl = num;
-
-    // Life Config
-    this.config = {
-        width:  800,
-            height:  600,
-        life: 5,
-        shield: 0,
-        framesPerSecond: 60
-    };
+    this.config =  LEVEL_CONFIG[this.lvl];
 
     // Food Config
     this.food = {
         width : 25,
         height : 25,
-        qty:  10 + (this.lvl * 2),
+        qty: this.config.f,
         img: {},
-        list: []
+        list: [],
+        onCollision: function () {
+            player.e.w +=CONFIG.player.grow.w;
+            player.e.h += CONFIG.player.grow.w;
+        }
     };
     this.food.img = new Image();
-    this.food.img.src = 'small-burguer.png';
+    this.food.img.src = 'f'+ this.lvl +'.png';
+
+    // shield Config
+    this.shield = {
+        width : 25,
+        height : 25,
+        qty: 1,
+        img: {},
+        list: [],
+        onCollision: function () {
+            player.addShield(CONFIG.shield.add);
+        }
+    };
+    this.shield.img = new Image();
+    this.shield.img.src = 'shield.png';
 
     // AI Config
     this.ai = {
         move: {
-            x: this.lvl,
-            y: this.lvl
+            x: this.config.s,
+            y: this.config.s
         },
         width : 20,
         height : 20,
-        qty: 10 + this.lvl,
+        qty: this.config.a,
         img: {},
         list: []
-    }
+    };
     this.ai.img = new Image();
-    this.ai.img.src = 'small-tiny-skull.png';
-
+    this.ai.img.src = 'a'+this.lvl+'.png';
 }
