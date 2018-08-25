@@ -15,7 +15,7 @@ function Level(num){
         }
     };
     this.food.img = new Image();
-    this.food.img.src = 'f'+ this.lvl +'.png';
+    this.food.img.src = 'f1' +'.png';
 
     // shield Config
     this.shield = {
@@ -44,5 +44,5 @@ function Level(num){
         list: []
     };
     this.ai.img = new Image();
-    this.ai.img.src = 'a'+this.lvl+'.png';
+    this.ai.img.src = 'a1'+'.png';
 }
