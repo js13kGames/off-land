@@ -31,6 +31,24 @@ function Level(num){
     this.shield.img = new Image();
     this.shield.img.src = 'shield.png';
 
+
+    // time freeze Config
+    this.timeFreeze = {
+        width : 25,
+        height : 25,
+        qty: 1,
+        img: {},
+        list: [],
+        onCollision: function () {
+            for (var i = 0; i < level.ai.list.length; i++) {
+                level.ai.list[i].frozenTime = CONFIG.timeFreeze.duration;
+            }
+        }
+    };
+    this.timeFreeze.img = new Image();
+    this.timeFreeze.img.src = 'clock.png';
+
+
     // AI Config
     this.ai = {
         move: {

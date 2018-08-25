@@ -1,6 +1,7 @@
 function AI(x, y, h, w) {
     this.e = new Element(x, y, h, w);
     this.safe = 0;
+    this.frozenTime = 0;
     var getRandomSign = function () {
         return Math.random() < 0.5 ? -1 : 1;
     };
@@ -9,9 +10,13 @@ function AI(x, y, h, w) {
         y: level.ai.move.y * getRandomSign()
     };
     this.move = function () {
-        this.changeDirection();
-        this.e.move(this.e.x + this.direction.x,  this.e.y + this.direction.y);
-        this.safe--;
+        if(this.frozenTime <= 0) {
+            this.changeDirection();
+            this.e.move(this.e.x + this.direction.x,  this.e.y + this.direction.y);
+            this.safe--;
+        } else {
+            this.frozenTime--;
+        }
     };
 
     this.changeDirection = function () {

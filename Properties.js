@@ -21,6 +21,11 @@ const CONFIG = {
         max: 3,
         chance: 600
     },
+    timeFreeze:{
+       chance: 600,
+       max: 1,
+       duration: 120
+    },
     screen: {
         w: 800,
         h: 600

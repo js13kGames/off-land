@@ -31,8 +31,11 @@ function drawGame() {
     player.reduceShield(0.1);
     checkFoodCollision();
     checkShieldCollision();
+    checkTimeFreezeCollision();
+
     drawFood();
     drawShield();
+    drawTimeFreeze();
     drawAI();
 
     game.showStats();
@@ -64,12 +67,22 @@ function drawFood() {
 }
 
 function drawShield() {
-    if (level.shield.list.length <= CONFIG.max && random(CONFIG.shield.chance) < 2)
-        generate(level.shield, CONFIG, Element);
+    if (level.shield.list.length < CONFIG.shield.max && random(CONFIG.shield.chance) < 2)
+         generate(level.shield, CONFIG.screen, Element);
 
     for (var i = 0; i < level.shield.list.length; i++) {
         var s = level.shield.list[i];
         displayImage(level.shield.img, s.x, s.y, s.w, s.h);
+    }
+};
+
+function drawTimeFreeze() {
+    if (level.timeFreeze.list.length < CONFIG.timeFreeze.max && random(CONFIG.timeFreeze.chance) < 2)
+        generate(level.timeFreeze, CONFIG.screen, Element);
+
+    for (var i = 0; i < level.timeFreeze.list.length; i++) {
+        var s = level.timeFreeze.list[i];
+        displayImage(level.timeFreeze.img, s.x, s.y, s.w, s.h);
     }
 };
 
@@ -88,6 +101,10 @@ function showLost() {
 
 function checkFoodCollision() {
     removeElementIfCollision(level.food);
+}
+
+function checkTimeFreezeCollision() {
+    removeElementIfCollision(level.timeFreeze);
 }
 
 function checkShieldCollision() {
