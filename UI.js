@@ -4,26 +4,40 @@ function calculateMousePos(evt) {
     var mouseX = evt.clientX - rect.left - root.scrollLeft;
     var mouseY = evt.clientY - rect.top - root.scrollTop;
     return {
-        x:mouseX,
-        y:mouseY
+        x: mouseX,
+        y: mouseY
     };
 }
 
-function colorRect(x,y, w,h, drawColor) {
-    canvasContext.fillStyle = drawColor;
-    canvasContext.fillRect(x,y, w,h);
+function colorRect(x, y, w, h, drawColor) {
+    ctx.fillStyle = drawColor;
+    ctx.fillRect(x, y, w, h);
 }
 
-function displayText(txt, x, y){
-    canvasContext.font="20px Georgia";
-    canvasContext.fillStyle = "white";
-    canvasContext.fillText(txt, x, y);
+function displayText(txt, x, y, color) {
+    ctx.font = "20px Trebuchet MS";
+    ctx.shadowColor = "grey";
+    ctx.shadowOffsetX = 1;
+    ctx.shadowOffsetY = 1;
+    ctx.shadowBlur = 10;
+    ctx.fillStyle = color ? color : CONFIG.mainColour;
+    ctx.fillText(txt, x, y);
+    ctx.fillStyle = CONFIG.mainColour;
 }
 
-function displayImage(img, x, y, w, h){
-    canvasContext.drawImage(img, x, y, w, h);
+function setTextSize(arg) {
+    arg.w = ctx.measureText(arg.txt).width;
+    arg.h = ctx.measureText('M').width;
+    arg.x = arg.init_x;
+    arg.y = arg.init_y - arg.h;
+    arg.xw = arg.x + arg.w;
+    arg.yh = arg.y + arg.h;
 }
 
-function textTimes(txt, times){
-    return (times > 0) ? new Array( times + 1 ).join( txt ) : "";
+function displayImage(img, x, y, w, h) {
+    ctx.drawImage(img, x, y, w, h);
+}
+
+function textTimes(txt, times) {
+    return (times > 0) ? new Array(times + 1).join(txt) : "";
 }

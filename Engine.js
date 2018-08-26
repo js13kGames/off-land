@@ -59,15 +59,27 @@ function checkShieldCollision() {
     removeElementIfCollision(level.shield)
 }
 
-function checkLevelStatus(){
+function checkLevelStatus() {
     if ((level.food.list.length === 0)) {
         game.nextLevel();
-    }else if (game.hasLost())
+    } else if (game.hasLost())
         game.restart();
 }
 
 // ==================================================
 
-function drawPointer(){
-    displayText(String.fromCharCode(game.pointer.char), game.pointer.x, game.pointer.y);
+function drawPointer() {
+    setTextSize(game.pointer);
+    displayText(game.pointer.txt, game.pointer.init_x, game.pointer.init_y, 'blue');
+}
+
+function drawMenuText(txt, pointer) {
+    setTextSize(txt);
+    displayText(txt.txt, txt.init_x, txt.init_y,
+        (checkCollision(txt, pointer)) ? CONFIG.secondColour : CONFIG.mainColour);
+}
+
+function difficultyText() {
+    game.normal.txt = ((difficulty == 1) ? String.fromCharCode(9733) : String.fromCharCode(9734)) + "Normal";
+    game.hard.txt = ((difficulty == 2) ? String.fromCharCode(9733) : String.fromCharCode(9734)) + "Hard";
 }
