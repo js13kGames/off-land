@@ -39,4 +39,5 @@ function Level(num) {
         x: this.config.s,
         y: this.config.s
     };
+	
 }

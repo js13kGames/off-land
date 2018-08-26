@@ -47,6 +47,34 @@ function drawTimeFreeze() {
     drawItemList(level.timeFreeze);
 };
 
+function drawBackground(){
+	colorRect(0, 0, canvas.width, canvas.height, 'black');
+	drawStars();
+	drawPlanet();
+}
+
+function drawPlanet(){
+      var radius = 250;
+      canvasContext.beginPath();
+      canvasContext.arc(700, 500, radius, 0, 2 * Math.PI, false);
+      canvasContext.fillStyle = 'black';
+      canvasContext.fill();
+      canvasContext.lineWidth = 5;
+      canvasContext.strokeStyle = '#003300';
+      canvasContext.stroke();
+}
+
+function drawStars(){
+	for (var i = 0; i < starList.length; i++) {
+		s = starList[i];
+		s.move();
+		canvasContext.beginPath();
+		canvasContext.arc(s.x, s.y, s.r, 0, 360);
+		canvasContext.fillStyle = "hsl(" + s.hue + ", " + s.sat + "%, 88%)";
+		canvasContext.fill();
+	}
+}
+
 function checkFoodCollision() {
     removeElementIfCollision(level.food);
 }
