@@ -1,4 +1,4 @@
-const LEVEL_CONFIG = {
+var LEVEL_CONFIG = {
     levels: 10,
     1: {f: 8, s: 1, a: 10},
     2: {f: 8, s: 2, a: 8},
@@ -12,7 +12,7 @@ const LEVEL_CONFIG = {
     10: {f: 8, s: 6, a: 12}
 };
 
-const CONFIG = {
+var CONFIG = {
     life: 5,
     start: 1,
     shield:{

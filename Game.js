@@ -22,16 +22,33 @@ function Game(){
         this.start();
     };
 
-    this.showStats = function(){
-        // Display Current Life
-        var life = textTimes(String.fromCharCode(CONFIG.lifeCharCode), this.life);
-        displayText("Life " + life, 25, CONFIG.screen.h - 40);
-
-        // Display Current Level
-        displayText("Level " + currentLevel, 25, CONFIG.screen.h - 20);
-    };
-
     this.hasLost = function () {
        return (this.life <= 0) ;
     };
+
+    this.mousemove = function(pos){
+        player.e.move(pos.x, pos.y);
+    };
+
+    this.click = function(pos){
+        // PAUSE GAME???
+        game = new Menu();
+    };
+
+    this.draw = function(){
+        drawBackground('black');
+
+        checkFoodCollision();
+        checkShieldCollision();
+        checkTimeFreezeCollision();
+
+        drawPlayer();
+        drawFood();
+        drawShield();
+        drawTimeFreeze();
+        drawAI();
+        drawStats();
+
+        checkLevelStatus();
+    }
 }

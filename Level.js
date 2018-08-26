@@ -1,66 +1,42 @@
-function Level(num){
+function Level(num) {
     this.lvl = num;
-    this.config =  LEVEL_CONFIG[this.lvl];
+    this.config = LEVEL_CONFIG[this.lvl];
+
+    function Item(w, h, q, i, f) {
+        this.width = w;
+        this.height = h;
+        this.qty = q;
+        this.img = new Image();
+        this.img.src = i + ".png";
+        this.onCollision = f;
+        this.list = [];
+    };
 
     // Food Config
-    this.food = {
-        width : 25,
-        height : 25,
-        qty: this.config.f,
-        img: {},
-        list: [],
-        onCollision: function () {
-            player.e.w +=CONFIG.player.grow.w;
-            player.e.h += CONFIG.player.grow.w;
+    this.food = new Item(25, 25, this.config.f, "f1", function () {
+        player.e.w += CONFIG.player.grow.w;
+        player.e.h += CONFIG.player.grow.w;
+    });
+
+    // Shield Config
+    this.shield = new Item(25, 25, 1, "shield", function () {
+        player.addShield(CONFIG.shield.add);
+    });
+
+    // time Freeze Config
+    this.timeFreeze = new Item(25, 25, 1, "clock", function () {
+        for (var i = 0; i < level.ai.list.length; i++) {
+            level.ai.list[i].frozenTime = CONFIG.timeFreeze.duration;
         }
-    };
-    this.food.img = new Image();
-    this.food.img.src = 'f1' +'.png';
-
-    // shield Config
-    this.shield = {
-        width : 25,
-        height : 25,
-        qty: 1,
-        img: {},
-        list: [],
-        onCollision: function () {
-            player.addShield(CONFIG.shield.add);
-        }
-    };
-    this.shield.img = new Image();
-    this.shield.img.src = 'shield.png';
-
-
-    // time freeze Config
-    this.timeFreeze = {
-        width : 25,
-        height : 25,
-        qty: 1,
-        img: {},
-        list: [],
-        onCollision: function () {
-            for (var i = 0; i < level.ai.list.length; i++) {
-                level.ai.list[i].frozenTime = CONFIG.timeFreeze.duration;
-            }
-        }
-    };
-    this.timeFreeze.img = new Image();
-    this.timeFreeze.img.src = 'clock.png';
-
+    });
 
     // AI Config
-    this.ai = {
-        move: {
-            x: this.config.s,
-            y: this.config.s
-        },
-        width : 20,
-        height : 20,
-        qty: this.config.a,
-        img: {},
-        list: []
+    this.ai = new Item(20, 20, this.config.a, "a1", function (a) {
+        a.safe = CONFIG.framesPerSecond / 2;
+        game.life--;
+    });
+    this.ai.move = {
+        x: this.config.s,
+        y: this.config.s
     };
-    this.ai.img = new Image();
-    this.ai.img.src = 'a1'+'.png';
 }
