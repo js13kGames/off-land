@@ -36,3 +36,13 @@ function removeElementIfCollision(item) {
         }
     }
 }
+
+function Text(txt, x, y) {
+    this.txt = txt;
+    this.init_x = x;
+    this.init_y = y;
+    this.x = 0;
+    this.y = 0;
+    this.xw = 0;
+    this.yh = 0;
+}
