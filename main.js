@@ -22,6 +22,8 @@ window.onload = function () {
             game.click(pos);
         });
 
+    generateStars();
+
     setInterval(function () {
         game.draw();
     }, 1000 / CONFIG.framesPerSecond);

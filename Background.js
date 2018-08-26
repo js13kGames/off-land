@@ -20,14 +20,14 @@ function star(x, y, r, hue, sat) {
 };
 
 function generateStars(){
-	starsQty = 500;
+	starsQty = 200;
 	colorrange = [0,60,240];
 	for (var i = 0; i < starsQty; i++) {
 		var x = Math.random() * canvas.offsetWidth;
 		y = Math.random() * canvas.offsetHeight;
 		radius = Math.random() * 1.2;
-		hue = colorrange[getRandom(0,colorrange.length - 1)],
-		sat = getRandom(50,100);
+		hue = colorrange[random(colorrange.length - 1)],
+		sat = random(50) + 50;
 		starList.push(new star(x, y, radius, hue, sat));
 	}	
 }

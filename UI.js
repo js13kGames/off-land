@@ -1,3 +1,26 @@
+function drawBackground(){
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    drawStars();
+    drawPlanet();
+}
+
+
+function drawPlanet(){
+    var radius = 250;
+    drawCustomImage();
+}
+
+function drawStars(){
+    for (var i = 0; i < starList.length; i++) {
+        s = starList[i];
+        s.move();
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, 360);
+        ctx.fillStyle = "hsl(" + s.hue + ", " + s.sat + "%, 88%)";
+        ctx.fill();
+    }
+}
+
 function calculateMousePos(evt) {
     var rect = canvas.getBoundingClientRect();
     var root = document.documentElement;
@@ -23,6 +46,16 @@ function displayText(txt, x, y, color) {
     ctx.fillStyle = color ? color : CONFIG.mainColour;
     ctx.fillText(txt, x, y);
     ctx.fillStyle = CONFIG.mainColour;
+}
+
+function drawCustomImage(){
+    ctx.beginPath();
+    ctx.arc(700, 500, 250, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'black';
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#003300';
+    ctx.stroke();
 }
 
 function setTextSize(arg) {

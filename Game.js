@@ -9,7 +9,6 @@ function Game(){
         player.addShield(CONFIG.shield.start);
         generate(level.ai, CONFIG.screen, AI);
         generate(level.food, CONFIG.screen, Element);
-		generateStars();
     };
 
     this.nextLevel = function () {
@@ -51,4 +50,5 @@ function Game(){
 
         checkLevelStatus();
     }
+
 }
