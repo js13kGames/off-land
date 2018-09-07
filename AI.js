@@ -1,5 +1,5 @@
 function AI(x, y, h, w) {
-    this.e = new Element(x, y, h, w);
+    this.e = new ElementUI(x, y, h, w);
     this.safe = 0;
     this.frozenTime = 0;
     var getRandomSign = function () {

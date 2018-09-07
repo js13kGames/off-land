@@ -62,11 +62,11 @@ function checkShieldCollision() {
 function checkLevelStatus() {
     if ((level.food.list.length === 0)) {
         if (level.lvl == LEVEL_CONFIG.levels)
-            game = new Screen(ScreenType.win);
+            game = new ScreenUI(ScreenType.win);
         else
             game.nextLevel();
     } else if (game.hasLost())
-        game = new Screen(ScreenType.lost);
+        game = new ScreenUI(ScreenType.lost);
 }
 
 // ==================================================

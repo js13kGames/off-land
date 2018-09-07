@@ -8,7 +8,7 @@ function Game(){
         player =  new Player(CONFIG.initPos.x, CONFIG.initPos.y, CONFIG.player.w, CONFIG.player.h);
         player.addShield(CONFIG.shield.start);
         generate(level.ai, CONFIG.screen, AI);
-        generate(level.food, CONFIG.screen, Element);
+        generate(level.food, CONFIG.screen, ElementUI);
     };
 
     this.nextLevel = function () {

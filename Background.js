@@ -22,14 +22,14 @@ function star(x, y, r, hue, sat) {
 };
 
 function generateStars(){
-	starsQty = 200;
-	colorrange = [0,60,240];
+	var starsQty = 200;
+	var colorrange = [0,60,240];
 	for (var i = 0; i < starsQty; i++) {
 		var x = Math.random() * canvas.offsetWidth;
-		y = Math.random() * canvas.offsetHeight;
-		radius = Math.random() * 1.2;
-		hue = colorrange[random(colorrange.length - 1)],
-		sat = random(50) + 50;
+		var y = Math.random() * canvas.offsetHeight;
+		var radius = Math.random() * 1.2;
+        var hue = colorrange[random(colorrange.length - 1)];
+        var sat = random(50) + 50;
 		starList.push(new star(x, y, radius, hue, sat));
 	}
 }

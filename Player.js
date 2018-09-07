@@ -1,5 +1,5 @@
 function Player(x, y, h, w) {
-    this.e = new Element(x, y, h, w);
+    this.e = new ElementUI(x, y, h, w);
     var maxShield = 100;
     this.shield = 0;
     this.hurt = 0;
@@ -22,9 +22,9 @@ function Player(x, y, h, w) {
         hurt: new Image()
     };
 
-    this.skins.normal.src = 'player.png';
-    this.skins.knight.src = 'safe.png';
-    this.skins.hurt.src = 'hurt.png';
+    this.skins.normal.src = IMGS.player;
+    this.skins.knight.src = IMGS.safe;
+    this.skins.hurt.src = IMGS.hurt;
 
 }
 

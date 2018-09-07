@@ -1,6 +1,6 @@
-function Screen(state) {
-    this.pointer = new Text(String.fromCharCode(9732), 0, 0);
-    this.main = new Text(state, CONFIG.screen.w / 3, CONFIG.screen.h / 3);
+function ScreenUI(state) {
+    this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+    this.main = new TextUI(state, CONFIG.screen.w / 3, CONFIG.screen.h / 3);
 
     //10132
     //9732
@@ -22,7 +22,7 @@ function Screen(state) {
     }
 }
 
-ScreenType = {
+var ScreenType = {
     lost: "You Lost",
     win: "Congratulations!"
 };

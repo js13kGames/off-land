@@ -12,7 +12,7 @@ function drawPlanet(){
 
 function drawStars(){
     for (var i = 0; i < starList.length; i++) {
-        s = starList[i];
+        var s = starList[i];
         s.move(i);
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, 360);

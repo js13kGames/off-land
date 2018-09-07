@@ -7,7 +7,7 @@ var game;
 window.onload = function () {
     game = new Menu();
 
-    canvas = document.getElementById('gameCanvas');
+    canvas = document.getElementById('g');
     ctx = canvas.getContext('2d');
 
     canvas.addEventListener('mousemove',

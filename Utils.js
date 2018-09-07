@@ -12,7 +12,7 @@ function generate(item, space, itemObj) {
 
 function generateItemRandomly(item, itemConf){
     if (item.list.length < itemConf.max && random(itemConf.chance) < 2)
-        generate(item, CONFIG.screen, Element);
+        generate(item, CONFIG.screen, ElementUI);
 }
 
 function checkCollision(item1, item2){
@@ -37,7 +37,7 @@ function removeElementIfCollision(item) {
     }
 }
 
-function Text(txt, x, y) {
+function TextUI(txt, x, y) {
     this.txt = txt;
     this.init_x = x;
     this.init_y = y;

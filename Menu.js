@@ -1,9 +1,9 @@
 function Menu() {
-    this.pointer = new Text(String.fromCharCode(9732), 0, 0);
-    this.start = new Text("Start Game", CONFIG.screen.w / 3, CONFIG.screen.h / 3);
-    this.normal = new Text("Normal", CONFIG.screen.w / 3, (CONFIG.screen.h / 3) + 50);
-    this.hard = new Text("Hard", CONFIG.screen.w / 3, (CONFIG.screen.h / 3) + 100);
-    this.help = new Text("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 3) + 200);
+    this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+    this.start = new TextUI("Start Game", CONFIG.screen.w / 3, CONFIG.screen.h / 3);
+    this.normal = new TextUI("Normal", CONFIG.screen.w / 3, (CONFIG.screen.h / 3) + 50);
+    this.hard = new TextUI("Hard", CONFIG.screen.w / 3, (CONFIG.screen.h / 3) + 100);
+    this.help = new TextUI("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 3) + 200);
 
     //10132
     //9732

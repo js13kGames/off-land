@@ -3,7 +3,7 @@ function Item(w, h, q, i, f) {
     this.height = h;
     this.qty = q;
     this.img = new Image();
-    this.img.src = i + ".png";
+    this.img.src = i ;
     this.onCollision = f;
     this.list = [];
 }
@@ -13,25 +13,25 @@ function Level(num) {
     this.config = LEVEL_CONFIG[this.lvl];
 
     // Food Config
-    this.food = new Item(25, 25, this.config.f, "f1", function () {
+    this.food = new Item(25, 25, this.config.f, IMGS.f1, function () {
         player.e.w += CONFIG.player.grow.w;
         player.e.h += CONFIG.player.grow.w;
     });
 
     // Shield Config
-    this.shield = new Item(25, 28, 1, "shield", function () {
+    this.shield = new Item(25, 28, 1, IMGS.shield, function () {
         player.addShield(CONFIG.shield.add);
     });
 
     // time Freeze Config
-    this.timeFreeze = new Item(25, 30, 1, "clock", function () {
+    this.timeFreeze = new Item(25, 30, 1, IMGS.clock, function () {
         for (var i = 0; i < level.ai.list.length; i++) {
             level.ai.list[i].frozenTime = CONFIG.timeFreeze.duration;
         }
     });
 
     // AI Config
-    this.ai = new Item(25, 25, this.config.a, "a1", function (a) {
+    this.ai = new Item(25, 25, this.config.a, IMGS.a1, function (a) {
         a.safe = CONFIG.framesPerSecond / 2;
         game.life--;
     });
