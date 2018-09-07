@@ -1,13 +1,14 @@
 function drawItemList(item) {
     for (var i = 0; i < item.list.length; i++) {
         var f = item.list[i];
-        displayImage(item.img, f.x, f.y, f.w, f.h);
+        displayImage(item.img, f.x, f.y, f.h, f.w);
     }
 }
 
 function drawPlayer() {
     displayImage(player.getSkin(), player.e.x, player.e.y, player.e.w, player.e.h);
     player.reduceShield(0.1);
+    player.hurt--;
 }
 
 function drawStats() {
@@ -23,8 +24,10 @@ function drawAI() {
     for (var i = 0; i < level.ai.list.length; i++) {
         var a = level.ai.list[i];
         a.move();
-        if (player.shield <= 0 && a.safe <= 0 && checkCollision(a.e, player.e))
+        if (player.shield <= 0 && a.safe <= 0 && checkCollision(a.e, player.e)) {
             level.ai.onCollision(a);
+            player.hurt = 10;
+        }
         displayImage(level.ai.img, a.e.x, a.e.y, a.e.w, a.e.h);
     }
 }
@@ -58,9 +61,12 @@ function checkShieldCollision() {
 
 function checkLevelStatus() {
     if ((level.food.list.length === 0)) {
-        game.nextLevel();
+        if (level.lvl == LEVEL_CONFIG.levels)
+            game = new Screen(ScreenType.win);
+        else
+            game.nextLevel();
     } else if (game.hasLost())
-        game.restart();
+        game = new Screen(ScreenType.lost);
 }
 
 // ==================================================

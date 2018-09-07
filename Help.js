@@ -20,7 +20,7 @@ function Help() {
     };
 
     this.draw = function () {
-        drawBackground('red');
+        drawBackground();
         drawHelpText(this.shield);
         displayImage(this.level.shield.img, this.shield.xw + 10, this.shield.y, this.level.shield.width, this.level.shield.height);
         drawHelpText(this.enemy);

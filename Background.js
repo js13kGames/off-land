@@ -1,4 +1,11 @@
 var starList = [];
+var getNewPosition = function(axis, coef, maxV){
+    var newPos;
+    newPos = (axis >= 0)? axis += coef : maxV;
+    newPos = (axis > maxV)? 0 : newPos;
+    return newPos;
+};
+
 function star(x, y, r, hue, sat) {
 	this.x = x;
 	this.y = y;
@@ -7,13 +14,8 @@ function star(x, y, r, hue, sat) {
 	this.yCoef = this.r / 2;
 	this.hue = hue;
 	this.sat = sat;
-	var getNewPosition = function(axis, coef, maxV){
-		var newPos;
-		newPos = (axis >= 0)? axis += coef : maxV;
-		newPos = (axis > maxV)? 0 : newPos;
-		return newPos;
-	};
-	this.move = function () {
+
+	this.move = function (i) {
 		this.x = getNewPosition(this.x, this.xCoef, 800);
 		this.y = getNewPosition(this.y, this.yCoef, 600);
     };
@@ -29,5 +31,5 @@ function generateStars(){
 		hue = colorrange[random(colorrange.length - 1)],
 		sat = random(50) + 50;
 		starList.push(new star(x, y, radius, hue, sat));
-	}	
+	}
 }

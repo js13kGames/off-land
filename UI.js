@@ -13,7 +13,7 @@ function drawPlanet(){
 function drawStars(){
     for (var i = 0; i < starList.length; i++) {
         s = starList[i];
-        s.move();
+        s.move(i);
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, 360);
         ctx.fillStyle = "hsl(" + s.hue + ", " + s.sat + "%, 88%)";
@@ -40,9 +40,9 @@ function colorRect(x, y, w, h, drawColor) {
 function displayText(txt, x, y, color) {
     ctx.font = "20px Trebuchet MS";
     ctx.shadowColor = "grey";
-    ctx.shadowOffsetX = 1;
-    ctx.shadowOffsetY = 1;
-    ctx.shadowBlur = 10;
+    // ctx.shadowOffsetX = 1;
+    // ctx.shadowOffsetY = 1;
+    // ctx.shadowBlur = 10;
     ctx.fillStyle = color ? color : CONFIG.mainColour;
     ctx.fillText(txt, x, y);
     ctx.fillStyle = CONFIG.mainColour;
@@ -68,6 +68,10 @@ function setTextSize(arg) {
 }
 
 function displayImage(img, x, y, w, h) {
+    // ctx.shadowColor = 'white';
+    // ctx.shadowOffsetX = 1;
+    // ctx.shadowOffsetY = 2;
+    // ctx.shadowBlur = 5;
     ctx.drawImage(img, x, y, w, h);
 }
 

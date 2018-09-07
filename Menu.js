@@ -27,8 +27,8 @@ function Menu() {
         }
     };
 
-    this.draw = function () {
-        drawBackground('pink');
+    this.draw = function (timer) {
+        drawBackground(timer);
         difficultyText();
         drawMenuText(this.start, this.pointer);
         drawMenuText(this.normal, this.pointer);

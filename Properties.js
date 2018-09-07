@@ -5,7 +5,7 @@ var CONFIG ={};
 function reloadConfig(diff){
     difficulty = diff;
     LEVEL_CONFIG = {
-        levels: 10,
+        levels: 3,
         1: {f: 8, s: 1, a: (5 * difficulty)+5},
         2: {f: 8, s: 2, a: (4 * difficulty)+4},
         3: {f: 8, s: 2, a: (5 * difficulty)+5},
@@ -43,8 +43,8 @@ function reloadConfig(diff){
             y: 300,
         },
         player: {
-            w: 35,
-            h: 35,
+            w: 50,
+            h: 50,
             grow: {
                 h: 3,
                 w: 3

@@ -23,9 +23,14 @@ window.onload = function () {
         });
 
     generateStars();
-
-    setInterval(function () {
+    
+    // setInterval(function () {
+    //     game.draw();
+    // }, 1000 / CONFIG.framesPerSecond);
+    function drawCanvasGame(){
         game.draw();
-    }, 1000 / CONFIG.framesPerSecond);
+        requestAnimationFrame(drawCanvasGame);
+    }
+    drawCanvasGame();
 };
 
