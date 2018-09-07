@@ -10,6 +10,11 @@ function generate(item, space, itemObj) {
     }
 }
 
+function generateItemRandomly(item, itemConf){
+    if (item.list.length < itemConf.max && random(itemConf.chance) < 2)
+        generate(item, CONFIG.screen, ElementUI);
+}
+
 function checkCollision(item1, item2){
     if(axisCollision(item1.x, item1.xw, item2.x, item2.xw)
         && axisCollision(item1.y, item1.yh, item2.y, item2.yh) )
@@ -20,4 +25,24 @@ function axisCollision(item1px1, item1px2, item2px1, item2px2){
     return (item1px1 > item2px1 && item1px1 < item2px2  )
         ||  (item1px2 >item2px1  && item1px2 <  item2px2)
         ||  (item2px1 >item1px1  && item2px1<  item1px2);
+}
+
+function removeElementIfCollision(item) {
+    var i = item.list.length;
+    while (i--) {
+        if (checkCollision(item.list[i], player.e)) {
+            item.list.splice(i, 1);
+            item.onCollision();
+        }
+    }
+}
+
+function TextUI(txt, x, y) {
+    this.txt = txt;
+    this.init_x = x;
+    this.init_y = y;
+    this.x = 0;
+    this.y = 0;
+    this.xw = 0;
+    this.yh = 0;
 }

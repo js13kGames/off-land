@@ -8,7 +8,7 @@ function Game(){
         player =  new Player(CONFIG.initPos.x, CONFIG.initPos.y, CONFIG.player.w, CONFIG.player.h);
         player.addShield(CONFIG.shield.start);
         generate(level.ai, CONFIG.screen, AI);
-        generate(level.food, CONFIG.screen, Element);
+        generate(level.food, CONFIG.screen, ElementUI);
     };
 
     this.nextLevel = function () {
@@ -22,16 +22,33 @@ function Game(){
         this.start();
     };
 
-    this.showStats = function(){
-        // Display Current Life
-        var life = textTimes(String.fromCharCode(CONFIG.lifeCharCode), this.life);
-        displayText("Life " + life, 25, CONFIG.screen.h - 40);
-
-        // Display Current Level
-        displayText("Level " + currentLevel, 25, CONFIG.screen.h - 20);
-    };
-
     this.hasLost = function () {
        return (this.life <= 0) ;
     };
+
+    this.mousemove = function(pos){
+        player.e.move(pos.x, pos.y);
+    };
+
+    this.click = function(pos){
+        // PAUSE GAME???
+        game = new Menu();
+    };
+
+    this.draw = function(){
+		drawBackground();
+        checkFoodCollision();
+        checkShieldCollision();
+        checkTimeFreezeCollision();
+
+        drawPlayer();
+        drawFood();
+        drawShield();
+        drawTimeFreeze();
+        drawAI();
+        drawStats();
+
+        checkLevelStatus();
+    }
+
 }

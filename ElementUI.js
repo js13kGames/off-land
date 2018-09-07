@@ -1,4 +1,4 @@
-function Element(x, y, h, w) {
+function ElementUI(x, y, h, w) {
     this.h = h;
     this.w = w;
 
