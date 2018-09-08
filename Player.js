@@ -22,9 +22,9 @@ function Player(x, y, h, w) {
     hurt: new Image()
   };
 
-  this.skins.normal.src = IMGS.player;
-  this.skins.knight.src = IMGS.safe;
-  this.skins.hurt.src = IMGS.hurt;
+  this.skins.normal.src = imgBase64(IMGS.player);
+  this.skins.knight.src = imgBase64(IMGS.safe);
+  this.skins.hurt.src = imgBase64(IMGS.hurt);
 
 }
 
