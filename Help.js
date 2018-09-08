@@ -2,17 +2,26 @@ function Help() {
   var rowV = 50;
   var posH = CONFIG.screen.w / 5;
   var verticalPosition = function (row) {
-    return (CONFIG.screen.h / 3) + (rowV * row);
+    return (CONFIG.screen.h / 6) + (rowV * row);
   };
   this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
-  this.collect = new TextUI("Collect all of them to go to next level", posH,
+  this.argument = new TextUI(
+      "Mr. Hans is lost in the vast Space and completely offline", posH,
       verticalPosition(0));
-  this.enemy = new TextUI("Enemies will reduce your life ", posH,
+  this.mission = new TextUI(
+      "Collect all the replacements to repair the transmitter and find the way back home ", posH
+      / 8,
       verticalPosition(1));
-  this.shield = new TextUI("Safe Mode to become inmune to enemies", posH,
-      verticalPosition(2));
-  this.timeFreeze = new TextUI("Freezes Enemies during some time", posH,
-      verticalPosition(3));
+  this.collect = new TextUI("Pick up all replacements to move to next level",
+      posH,
+      verticalPosition(4));
+  this.enemy = new TextUI("Enemies will reduce your life ", posH,
+      verticalPosition(5));
+  this.shield = new TextUI("Safe Mode to become immune to damage", posH,
+      verticalPosition(6));
+  this.timeFreeze = new TextUI("Time-Stop to freeze enemies for a short time",
+      posH,
+      verticalPosition(7));
 
   this.mousemove = function (pos) {
     this.pointer.init_x = pos.x;
@@ -25,6 +34,8 @@ function Help() {
 
   this.draw = function () {
     drawBackground();
+    drawHelpText(this.argument);
+    drawHelpText(this.mission);
     drawHelpText(this.shield);
     displayImage(this.level.shield.img, this.shield.xw + 10, this.shield.y,
         this.level.shield.width, this.level.shield.height);
@@ -39,7 +50,7 @@ function Help() {
         this.timeFreeze.y, this.level.timeFreeze.width,
         this.level.timeFreeze.height);
     drawPointer();
-  }
+  };
 
   this.level = new Level(1);
 
