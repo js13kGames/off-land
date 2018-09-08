@@ -16,6 +16,7 @@ function Level(num) {
   this.food = new Item(25, 25, this.config.f, imgBase64(IMGS.f1), function () {
     player.e.w += CONFIG.player.grow.w;
     player.e.h += CONFIG.player.grow.w;
+    game.life += game.life < CONFIG.life ? CONFIG.restoreLife : 0;
   });
 
   // Shield Config

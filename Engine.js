@@ -14,7 +14,7 @@ function drawPlayer() {
 
 function drawStats() {
   // Display Current Life
-  var life = textTimes(String.fromCharCode(CONFIG.lifeCharCode), game.life);
+  var life = textTimes(String.fromCharCode(CONFIG.lifeCharCode), Math.floor(game.life));
   displayText("Life " + life, 25, CONFIG.screen.h - 40);
 
   // Display Current Level

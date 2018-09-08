@@ -14,7 +14,7 @@ function Player(x, y, h, w) {
   this.getSkin = function () {
     return (this.shield > 0) ? this.skins.knight : (this.hurt < 0)
         ? this.skins.normal : this.skins.hurt;
-  }
+  };
 
   this.skins = {
     normal: new Image(),

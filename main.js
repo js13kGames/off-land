@@ -1,8 +1,4 @@
-var canvas;
-var ctx;
-var level;
-var player;
-var game;
+var canvas, ctx, level, player, game;
 
 window.onload = function () {
   game = new Menu();
@@ -24,9 +20,6 @@ window.onload = function () {
 
   generateStars();
 
-  // setInterval(function () {
-  //     game.draw();
-  // }, 1000 / CONFIG.framesPerSecond);
   function drawCanvasGame() {
     game.draw();
     requestAnimationFrame(drawCanvasGame);

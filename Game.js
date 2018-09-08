@@ -25,7 +25,7 @@ function Game() {
   };
 
   this.hasLost = function () {
-    return (this.life <= 0);
+    return (Math.floor(this.life) <= 0);
   };
 
   this.mousemove = function (pos) {
