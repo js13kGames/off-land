@@ -1,11 +1,10 @@
 function drawBackground() {
   colorRect(0, 0, canvas.width, canvas.height, 'black');
   drawStars();
-  drawPlanet();
 }
 
-function drawPlanet() {
-  new Planet(PLANET[0]);
+function drawPlanet(currentLevel) {
+  new Planet(PLANET[currentLevel - 1]);
 }
 
 function drawStars() {

@@ -37,6 +37,7 @@ function Game() {
 
   this.draw = function () {
     drawBackground();
+    drawPlanet(currentLevel);
     checkFoodCollision();
     checkShieldCollision();
     checkTimeFreezeCollision();
