@@ -34,8 +34,8 @@ function reloadConfig(diff) {
       duration: 120
     },
     screen: {
-      w: 800,
-      h: 600
+      w: canvas.offsetWidth,
+      h: canvas.offsetHeight
     },
     framesPerSecond: 60,
     lifeCharCode: 10084,
@@ -44,18 +44,16 @@ function reloadConfig(diff) {
       y: 300,
     },
     player: {
-      w: 50,
-      h: 50,
+      w: 50 * resolution,
+      h: 50 * resolution,
       grow: {
-        h: 3,
-        w: 3
+        h: 3 * resolution,
+        w: 3 * resolution
       }
     },
     mainColour: 'white',
-    secondColour: 'green'
+    secondColour: 'teal'
   };
 }
-
-reloadConfig(1);
 
 // Shield Char Code 128737

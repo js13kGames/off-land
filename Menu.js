@@ -1,14 +1,17 @@
 function Menu() {
-  this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
-  this.start = new TextUI("Start Game", CONFIG.screen.w / 3, CONFIG.screen.h
-      / 3);
-  this.normal = new TextUI("Normal", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
-      + 50);
-  this.hard = new TextUI("Hard", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
-      + 100);
-  this.help = new TextUI("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
-      + 200);
-  this.fullScreen = new TextUI("Fullscreen " + String.fromCharCode(10530), 30, CONFIG.screen.h-20);
+
+  this.calculations = function(){
+    this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+    this.start = new TextUI("Start Game", CONFIG.screen.w / 3, CONFIG.screen.h
+        / 3);
+    this.normal = new TextUI("Normal", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
+        + 50);
+    this.hard = new TextUI("Hard", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
+        + 100);
+    this.help = new TextUI("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
+        + 200);
+    this.fullScreen = new TextUI("Fullscreen " + String.fromCharCode(10530), 30, CONFIG.screen.h-20);
+  }
 
   //10132
   //9732
@@ -30,7 +33,7 @@ function Menu() {
     } else if (checkCollision(this.help, this.pointer)) {
       game = new Help();
     }else if (checkCollision(this.fullScreen, this.pointer)){
-      openFullscreen();
+      openFullscreen(true);
     }
   };
 
@@ -44,4 +47,6 @@ function Menu() {
     drawMenuText(this.fullScreen, this.pointer);
     drawPointer();
   }
+
+  this.calculations();
 }

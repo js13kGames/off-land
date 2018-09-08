@@ -1,18 +1,22 @@
 function Help() {
-  var rowV = 50;
-  var posH = CONFIG.screen.w / 5;
+  var rowV, posH;
   var verticalPosition = function (row) {
     return (CONFIG.screen.h / 3) + (rowV * row);
   };
-  this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
-  this.collect = new TextUI("Collect all of them to go to next level", posH,
-      verticalPosition(0));
-  this.enemy = new TextUI("Enemies will reduce your life ", posH,
-      verticalPosition(1));
-  this.shield = new TextUI("Safe Mode to become inmune to enemies", posH,
-      verticalPosition(2));
-  this.timeFreeze = new TextUI("Freezes Enemies during some time", posH,
-      verticalPosition(3));
+  this.calculations = function () {
+    rowV = 50;
+    posH = CONFIG.screen.w / 5;
+
+    this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+    this.collect = new TextUI("Collect all of them to go to next level", posH,
+        verticalPosition(0));
+    this.enemy = new TextUI("Enemies will reduce your life ", posH,
+        verticalPosition(1));
+    this.shield = new TextUI("Safe Mode to become inmune to enemies", posH,
+        verticalPosition(2));
+    this.timeFreeze = new TextUI("Freezes Enemies during some time", posH,
+        verticalPosition(3));
+  }
 
   this.mousemove = function (pos) {
     this.pointer.init_x = pos.x;
@@ -41,6 +45,6 @@ function Help() {
     drawPointer();
   }
 
+  this.calculations();
   this.level = new Level(1);
-
 }

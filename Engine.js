@@ -1,7 +1,17 @@
 function drawItemList(item) {
   for (var i = 0; i < item.list.length; i++) {
     var f = item.list[i];
+    f.resize();
     displayImage(item.img, f.x, f.y, f.h, f.w);
+  }
+}
+
+function relocateItemList(list, move_x, move_y, is_ai) {
+  for (var i = 0; i < list.length; i++) {
+    var a = is_ai ? list[i].e : list[i];
+    a.x = Math.floor((a.x / 100 * move_x));
+    a.y = Math.floor((a.y / 100 * move_y));
+    a.relocate();
   }
 }
 
@@ -14,7 +24,8 @@ function drawPlayer() {
 
 function drawStats() {
   // Display Current Life
-  var life = textTimes(String.fromCharCode(CONFIG.lifeCharCode), Math.floor(game.life));
+  var life = textTimes(String.fromCharCode(CONFIG.lifeCharCode),
+      Math.floor(game.life));
   displayText("Life " + life, 25, CONFIG.screen.h - 40);
 
   // Display Current Level
@@ -24,6 +35,7 @@ function drawStats() {
 function drawAI() {
   for (var i = 0; i < level.ai.list.length; i++) {
     var a = level.ai.list[i];
+    a.e.resize();
     a.move();
     if (player.shield <= 0 && a.safe <= 0 && checkCollision(a.e, player.e)) {
       level.ai.onCollision(a);

@@ -77,3 +77,53 @@ function displayImage(img, x, y, w, h) {
 function textTimes(txt, times) {
   return (times > 0) ? new Array(times + 1).join(txt) : "";
 }
+
+function openFullscreen(activate) {
+  if (canvas.requestFullscreen) {
+    canvas.requestFullscreen();
+  } else if (canvas.mozRequestFullScreen) { /* Firefox */
+    canvas.mozRequestFullScreen();
+  } else if (canvas.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    canvas.webkitRequestFullscreen();
+  } else if (canvas.msRequestFullscreen) { /* IE/Edge */
+    canvas.msRequestFullscreen();
+  }
+}
+
+function resizeScreen() {
+  var isInFullScreen = (document.fullscreenElement && document.fullscreenElement
+      !== null) ||
+      (document.webkitFullscreenElement && document.webkitFullscreenElement
+          !== null) ||
+      (document.mozFullScreenElement && document.mozFullScreenElement !== null)
+      ||
+      (document.msFullscreenElement && document.msFullscreenElement !== null);
+
+  var from = {w: canvas.width, h: canvas.height};
+  if (isInFullScreen) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    resolution = 1.5;
+  } else {
+    canvas.width = 800;
+    canvas.height = 600;
+    resolution = 1;
+  }
+
+  reloadConfig(difficulty);
+  generateStars();
+  game.calculations();
+  relocateEveryone(from, {w: 800, h: 600});
+}
+
+function relocateEveryone(from, to) {
+  if (from.w !== to.w && from.h !== to.h) {
+    var x_p = 100 / from.w * to.w;
+    var y_p = 100 / from.h * to.h;
+    relocateItemList(level.ai.list, x_p, y_p, true);
+    relocateItemList(level.shield.list, x_p, y_p);
+    relocateItemList(level.timeFreeze.list, x_p, y_p);
+    relocateItemList(level.food.list, x_p, y_p);
+    relocateItemList([player], x_p, y_p, true);
+  }
+}

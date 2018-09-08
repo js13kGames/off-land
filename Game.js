@@ -51,4 +51,11 @@ function Game() {
     checkLevelStatus();
   }
 
+  this.calculations = function() {
+    player.e.w = CONFIG.player.w;
+    player.e.h = CONFIG.player.h;
+    player.e.relocate();
+    player.addShield(1);
+  }
+
 }
