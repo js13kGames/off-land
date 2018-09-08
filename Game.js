@@ -33,8 +33,6 @@ function Game() {
   };
 
   this.click = function (pos) {
-    // PAUSE GAME???
-    game = new Menu();
   };
 
   this.draw = function () {
