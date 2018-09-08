@@ -8,6 +8,7 @@ function Menu() {
       + 100);
   this.help = new TextUI("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
       + 200);
+  this.fullScreen = new TextUI("Fullscreen " + String.fromCharCode(10530), CONFIG.screen.w-130, CONFIG.screen.h-20);
 
   //10132
   //9732
@@ -28,6 +29,8 @@ function Menu() {
       reloadConfig(2);
     } else if (checkCollision(this.help, this.pointer)) {
       game = new Help();
+    }else if (checkCollision(this.fullScreen, this.pointer)){
+      openFullscreen();
     }
   };
 
@@ -38,6 +41,7 @@ function Menu() {
     drawMenuText(this.normal, this.pointer);
     drawMenuText(this.hard, this.pointer);
     drawMenuText(this.help, this.pointer);
+    drawMenuText(this.fullScreen, this.pointer);
     drawPointer();
   }
 }
