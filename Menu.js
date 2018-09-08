@@ -8,7 +8,7 @@ function Menu() {
       + 100);
   this.help = new TextUI("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
       + 200);
-  this.fullScreen = new TextUI("Fullscreen " + String.fromCharCode(10530), CONFIG.screen.w-130, CONFIG.screen.h-20);
+  this.fullScreen = new TextUI("Fullscreen " + String.fromCharCode(10530), 30, CONFIG.screen.h-20);
 
   //10132
   //9732
