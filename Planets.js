@@ -26,7 +26,7 @@ function Planet(p) {
   this.draw();
 }
 
-SPECS = {
+var SPECS = {
   a: {
     xs: 750,
     ys: 160,
@@ -45,7 +45,7 @@ SPECS = {
   }
 };
 
-PLANET = [
+var PLANET = [
   {
     specs: SPECS.b,
     grd: [

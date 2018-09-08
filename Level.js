@@ -13,11 +13,12 @@ function Level(num) {
   this.config = LEVEL_CONFIG[this.lvl];
 
   // Food Config
-  this.food = new Item(25, 25, this.config.f, imgBase64(IMGS.f1), function () {
-    player.e.w += CONFIG.player.grow.w;
-    player.e.h += CONFIG.player.grow.w;
-    game.life += game.life < CONFIG.life ? CONFIG.restoreLife : 0;
-  });
+  this.food = new Item(25, 25, this.config.f,
+      imgBase64(IMGS.food[this.lvl - 1]), function () {
+        player.e.w += CONFIG.player.grow.w;
+        player.e.h += CONFIG.player.grow.w;
+        game.life += game.life < CONFIG.life ? CONFIG.restoreLife : 0;
+      });
 
   // Shield Config
   this.shield = new Item(25, 28, 1, imgBase64(IMGS.shield), function () {
@@ -32,10 +33,11 @@ function Level(num) {
   });
 
   // AI Config
-  this.ai = new Item(25, 25, this.config.a, imgBase64(IMGS.a[this.lvl - 1]), function (a) {
-    a.safe = CONFIG.framesPerSecond / 2;
-    game.life--;
-  });
+  this.ai = new Item(25, 25, this.config.a, imgBase64(IMGS.a[this.lvl - 1]),
+      function (a) {
+        a.safe = CONFIG.framesPerSecond / 2;
+        game.life--;
+      });
   this.ai.move = {
     x: this.config.s,
     y: this.config.s
