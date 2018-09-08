@@ -31,7 +31,7 @@ function Level(num) {
     });
 
     // AI Config
-    this.ai = new Item(25, 25, this.config.a, IMGS.a1, function (a) {
+    this.ai = new Item(25, 25, this.config.a, IMGS.a[this.lvl - 1], function (a) {
         a.safe = CONFIG.framesPerSecond / 2;
         game.life--;
     });
