@@ -9,9 +9,9 @@ function Help() {
       "Mr. Hans is lost in the vast Space and completely offline", posH,
       verticalPosition(0));
   this.mission = new TextUI(
-      "Collect all the radio transmitter parts and find the way back home ", posH - 50,
+      "Collect all the radio transmitter components and find the way back home ", posH / 2,
       verticalPosition(1));
-  this.collect = new TextUI("Pick up all replacements to move to next level",
+  this.collect = new TextUI("Pick up all components to move to next level",
       posH,
       verticalPosition(4));
   this.enemy = new TextUI("Enemies will reduce your life ", posH,
