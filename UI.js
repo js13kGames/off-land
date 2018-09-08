@@ -5,8 +5,7 @@ function drawBackground() {
 }
 
 function drawPlanet() {
-  var radius = 250;
-  drawCustomImage();
+  new Planet(PLANET[0]);
 }
 
 function drawStars() {
@@ -45,16 +44,6 @@ function displayText(txt, x, y, color) {
   ctx.fillStyle = color ? color : CONFIG.mainColour;
   ctx.fillText(txt, x, y);
   ctx.fillStyle = CONFIG.mainColour;
-}
-
-function drawCustomImage() {
-  ctx.beginPath();
-  ctx.arc(700, 500, 250, 0, 2 * Math.PI, false);
-  ctx.fillStyle = 'black';
-  ctx.fill();
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = '#003300';
-  ctx.stroke();
 }
 
 function setTextSize(arg) {
