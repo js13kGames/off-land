@@ -48,3 +48,7 @@ function TextUI(txt, x, y) {
   this.xw = 0;
   this.yh = 0;
 }
+
+function changeResolution(val, change){
+  return change > 0 ? val / 100 * change : val;
+}

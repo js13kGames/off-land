@@ -1,6 +1,13 @@
 var difficulty;
 var LEVEL_CONFIG = {};
-var CONFIG = {};
+var CONFIG = {
+  screen: {
+    base: {
+      w: 800,
+      h: 600
+    }
+  }
+};
 
 function reloadConfig(diff) {
   difficulty = diff;
@@ -35,7 +42,11 @@ function reloadConfig(diff) {
     },
     screen: {
       w: canvas.offsetWidth,
-      h: canvas.offsetHeight
+      h: canvas.offsetHeight,
+      base:{
+        w: 800,
+        h: 600
+      }
     },
     framesPerSecond: 60,
     lifeCharCode: 10084,
@@ -44,11 +55,11 @@ function reloadConfig(diff) {
       y: 300,
     },
     player: {
-      w: 50 * resolution,
-      h: 50 * resolution,
+      w: changeResolution(50, resolution.w),
+      h: changeResolution(50, resolution.h),
       grow: {
-        h: 3 * resolution,
-        w: 3 * resolution
+        h: changeResolution(3, resolution.h),
+        w: changeResolution(3, resolution.w)
       }
     },
     mainColour: 'white',

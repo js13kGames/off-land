@@ -5,8 +5,8 @@ function ElementUI(x, y, h, w) {
   };
 
   this.resize = function(){
-    this.w = this.original.w * resolution;
-    this.h = this.original.h * resolution;
+    this.w = changeResolution(this.original.w, resolution.w);
+    this.h = changeResolution(this.original.h, resolution.h);
   }
 
   this.resize();

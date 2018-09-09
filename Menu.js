@@ -1,16 +1,20 @@
 function Menu() {
 
-  this.calculations = function(){
+  this.calculations = function () {
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
     this.start = new TextUI("Start Game", CONFIG.screen.w / 3, CONFIG.screen.h
         / 3);
-    this.normal = new TextUI("Normal", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
-        + 50);
+    this.normal = new TextUI("Normal", CONFIG.screen.w / 3,
+        (CONFIG.screen.h / 3)
+        + changeResolution(50, resolution.w));
     this.hard = new TextUI("Hard", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
-        + 100);
+        + changeResolution(100, resolution.w));
     this.help = new TextUI("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
-        + 200);
-    this.fullScreen = new TextUI("Fullscreen " + String.fromCharCode(10530), 30, CONFIG.screen.h-20);
+        + changeResolution(200, resolution.w));
+    if (allowFullScr) {
+      this.fullScreen = new TextUI(
+          "Fullscreen " + String.fromCharCode(9635), 30, CONFIG.screen.h - changeResolution(20, resolution.w));
+    }
   }
 
   //10132
@@ -32,8 +36,8 @@ function Menu() {
       reloadConfig(2);
     } else if (checkCollision(this.help, this.pointer)) {
       game = new Help();
-    }else if (checkCollision(this.fullScreen, this.pointer)){
-      openFullscreen(true);
+    } else if (allowFullScr && checkCollision(this.fullScreen, this.pointer)) {
+      openFullscreen();
     }
   };
 
@@ -44,7 +48,9 @@ function Menu() {
     drawMenuText(this.normal, this.pointer);
     drawMenuText(this.hard, this.pointer);
     drawMenuText(this.help, this.pointer);
-    drawMenuText(this.fullScreen, this.pointer);
+    if (allowFullScr) {
+      drawMenuText(this.fullScreen, this.pointer);
+    }
     drawPointer();
   }
 
