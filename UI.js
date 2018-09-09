@@ -1,6 +1,12 @@
 function drawBackground() {
-  colorRect(0, 0, canvas.width, canvas.height, 'black');
-  drawStars();
+  if (backImg) {
+    displayImage(backImg, 0, 0, canvas.width, canvas.height);
+  } else {
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    drawStars();
+    backImg = new Image();
+    backImg.src = canvas.toDataURL();
+  }
 }
 
 function drawPlanet(currentLevel) {
@@ -71,6 +77,7 @@ function openFullscreen() {
 }
 
 var from;
+
 function resizeScreen() {
   from = {w: canvas.width, h: canvas.height};
   setCanvasSize();

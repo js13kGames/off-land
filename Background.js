@@ -28,7 +28,7 @@ function generateStars() {
   for (var i = 0; i < starsQty; i++) {
     var x = Math.random() * CONFIG.screen.w;
     var y = Math.random() * CONFIG.screen.h;
-    var radius = Math.random() * 1.2;
+    var radius = Math.random() * 1.8;
     var hue = colorrange[random(colorrange.length - 1)];
     var sat = random(50) + 50;
     starList.push(new star(x, y, radius, hue, sat));

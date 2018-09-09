@@ -13,6 +13,7 @@ function Game() {
   };
 
   this.nextLevel = function () {
+    this.generateStaticImages();
     currentLevel = (currentLevel === LEVEL_CONFIG.levels) ? CONFIG.start
         : currentLevel + 1;
     this.start();
@@ -22,6 +23,11 @@ function Game() {
     currentLevel = CONFIG.start;
     this.life = CONFIG.life;
     this.start();
+  };
+
+  this.generateStaticImages = function(){
+    generateStars();
+    backImg = null;
   };
 
   this.hasLost = function () {
