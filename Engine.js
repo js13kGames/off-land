@@ -109,7 +109,8 @@ function drawMenuText(txt, pointer) {
       (checkCollision(txt, pointer)) ? CONFIG.secondColour : CONFIG.mainColour);
 }
 
-function drawHelpText(txt) {
+function drawHelpText(txt, colour) {
+  colour = colour?colour:CONFIG.mainColour;
   setTextSize(txt);
-  displayText(txt.txt, txt.init_x, txt.init_y, CONFIG.mainColour);
+  displayText(txt.txt, txt.init_x, txt.init_y, colour);
 }

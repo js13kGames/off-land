@@ -38,8 +38,8 @@ function Help() {
 
   this.draw = function () {
     drawBackground();
-    drawHelpText(this.argument);
-    drawHelpText(this.mission);
+    drawHelpText(this.argument, CONFIG.secondColour);
+    drawHelpText(this.mission, CONFIG.secondColour);
     drawHelpText(this.shield);
     displayImage(this.level.shield.img, this.shield.xw + 10, this.shield.y,
         changeResolution(this.level.shield.width, resolution.w),
