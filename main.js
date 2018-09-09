@@ -12,10 +12,10 @@ window.onload = function () {
   ctx = canvas.getContext('2d');
 
   setStyles();
-  generateAllSounds();
   checkAllowFullScr();
   setCanvasSize();
   reloadConfig(1);
+  generateAllSounds();
   game = new Menu();
 
   canvas.addEventListener('mousemove',
