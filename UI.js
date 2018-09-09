@@ -6,6 +6,7 @@ function drawBackground() {
     drawStars();
     backImg = new Image();
     backImg.src = canvas.toDataURL();
+    generateDynamicStars();
   }
 }
 
@@ -82,7 +83,6 @@ function resizeScreen() {
   from = {w: canvas.width, h: canvas.height};
   setCanvasSize();
   reloadConfig(difficulty);
-  generateStars();
   game.calculations(from, {w: canvas.width, h: canvas.height});
 }
 

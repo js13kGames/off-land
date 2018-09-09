@@ -34,7 +34,7 @@ window.onload = function () {
     resizeScreen();
   };
 
-  generateStars();
+  generateStaticStars();
 
   function drawCanvasGame() {
     game.draw();
@@ -54,8 +54,10 @@ function checkAllowFullScr() {
   allowFullScr = nIdx == -1;
 }
 
-function setStyles(){
+function setStyles() {
   canvas.style.cssText = "cursor:none;position:absolute;left:0;right:0;margin:auto;border:#474747 dotted;";
-  document.getElementsByTagName("body")[0].style.cssText = "overflow:hidden;background:#000;";
-  document.getElementsByTagName("html")[0].style.cssText = "overflow:hidden;background:#000;";
+  document.getElementsByTagName(
+      "body")[0].style.cssText = "overflow:hidden;background:#000;";
+  document.getElementsByTagName(
+      "html")[0].style.cssText = "overflow:hidden;background:#000;";
 }

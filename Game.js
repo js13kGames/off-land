@@ -25,8 +25,8 @@ function Game() {
     this.start();
   };
 
-  this.generateStaticImages = function(){
-    generateStars();
+  this.generateStaticImages = function () {
+    generateStaticStars();
     backImg = null;
   };
 
@@ -43,6 +43,7 @@ function Game() {
 
   this.draw = function () {
     drawBackground();
+    drawStars();
     drawPlanet(currentLevel);
     checkFoodCollision();
     checkShieldCollision();
