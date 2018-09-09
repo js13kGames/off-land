@@ -69,27 +69,13 @@ function openFullscreen() {
   }
 }
 
-var from, x_p = 0, y_p = 0;
-
+var from;
 function resizeScreen() {
   from = {w: canvas.width, h: canvas.height};
   setCanvasSize();
   reloadConfig(difficulty);
   generateStars();
-  game.calculations();
-  relocateEveryone(from, {w: canvas.width, h: canvas.height});
-}
-
-function relocateEveryone(from, to) {
-  if (from.w !== to.w && from.h !== to.h) {
-    x_p = 100 / from.w * to.w;
-    y_p = 100 / from.h * to.h;
-    relocateItemList(level.ai.list, x_p, y_p, true);
-    relocateItemList(level.shield.list, x_p, y_p);
-    relocateItemList(level.timeFreeze.list, x_p, y_p);
-    relocateItemList(level.food.list, x_p, y_p);
-    relocateItemList([player], x_p, y_p, true);
-  }
+  game.calculations(from, {w: canvas.width, h: canvas.height});
 }
 
 function setCanvasSize() {

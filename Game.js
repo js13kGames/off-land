@@ -52,11 +52,27 @@ function Game() {
     checkLevelStatus();
   }
 
-  this.calculations = function() {
+  this.calculations = function (from, to) {
     player.e.w = CONFIG.player.w;
     player.e.h = CONFIG.player.h;
     player.e.relocate();
-    player.addShield(1);
+    if (player.shield <= 0) {
+      player.addShield(1);
+    }
+    relocateEveryone(from, to);
+  }
+
+  function relocateEveryone(from, to) {
+    var x_p = 0, y_p = 0;
+    if (from.w !== to.w && from.h !== to.h) {
+      x_p = 100 / from.w * to.w;
+      y_p = 100 / from.h * to.h;
+      relocateItemList(level.ai.list, x_p, y_p, true);
+      relocateItemList(level.shield.list, x_p, y_p);
+      relocateItemList(level.timeFreeze.list, x_p, y_p);
+      relocateItemList(level.food.list, x_p, y_p);
+      relocateItemList([player], x_p, y_p, true);
+    }
   }
 
 }
