@@ -1,6 +1,7 @@
 var canvas, ctx, level, player, game;
 
 window.onload = function () {
+  generateAllSounds();
   game = new Menu();
 
   canvas = document.getElementById('g');

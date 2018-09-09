@@ -28,6 +28,7 @@ function drawAI() {
     if (player.shield <= 0 && a.safe <= 0 && checkCollision(a.e, player.e)) {
       level.ai.onCollision(a);
       player.hurt = 10;
+      playSound(SOUNDSGAME.hurt);
     }
     displayImage(level.ai.img, a.e.x, a.e.y, a.e.w, a.e.h);
   }
@@ -63,11 +64,15 @@ function checkLevelStatus() {
   if ((level.food.list.length === 0)) {
     if (level.lvl == LEVEL_CONFIG.levels) {
       game = new ScreenUI(ScreenType.win);
+      stopSong();
+      playSound(SOUNDSGAME.win);
     } else {
       game.nextLevel();
     }
   } else if (game.hasLost()) {
     game = new ScreenUI(ScreenType.lost);
+    stopSong();
+    playSound(SOUNDSGAME.lose);
   }
 }
 

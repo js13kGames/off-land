@@ -1,10 +1,10 @@
 function Game() {
   var currentLevel = CONFIG.start;
   this.life = CONFIG.life;
-
   // Start New Level
   this.start = function () {
     level = new Level(currentLevel);
+    playSong(currentLevel);
     player = new Player(CONFIG.initPos.x, CONFIG.initPos.y, CONFIG.player.w,
         CONFIG.player.h);
     player.addShield(CONFIG.shield.start);
@@ -50,6 +50,6 @@ function Game() {
     drawStats();
 
     checkLevelStatus();
-  }
+  };
 
 }

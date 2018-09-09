@@ -17,16 +17,23 @@ function Level(num) {
       imgBase64(IMGS.food[this.lvl - 1]), function () {
         player.e.w += CONFIG.player.grow.w;
         player.e.h += CONFIG.player.grow.w;
+        var proviousLife = game.life;
         game.life += game.life < CONFIG.life ? CONFIG.restoreLife : 0;
+
+        if(Math.floor(game.life) > Math.floor(proviousLife))
+          playSound(SOUNDSGAME.lifeUp);
+
       });
 
   // Shield Config
   this.shield = new Item(25, 28, 1, imgBase64(IMGS.shield), function () {
     player.addShield(CONFIG.shield.add);
+    playSound(SOUNDSGAME.shield);
   });
 
   // time Freeze Config
   this.timeFreeze = new Item(25, 30, 1, imgBase64(IMGS.clock), function () {
+    playSound(SOUNDSGAME.timeFreeze);
     for (var i = 0; i < level.ai.list.length; i++) {
       level.ai.list[i].frozenTime = CONFIG.timeFreeze.duration;
     }
