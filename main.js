@@ -1,12 +1,18 @@
 var div, canvas, ctx, level, player, game,
     resolution = {w: 100, h: 100, planet: 100}, allowFullScr = true;
 
+function determineResolution() {
+  resolution.w = 100 / CONFIG.screen.base.w * canvas.width;
+  resolution.h = 100 / CONFIG.screen.base.h * canvas.height;
+}
+
 window.onload = function () {
   canvas = document.getElementsByTagName("canvas")[0];
   div = document.getElementsByTagName('div')[0];
   ctx = canvas.getContext('2d');
 
   setStyles();
+  generateAllSounds();
   checkAllowFullScr();
   setCanvasSize();
   reloadConfig(1);
@@ -37,11 +43,6 @@ window.onload = function () {
 
   drawCanvasGame();
 };
-
-function determineResolution() {
-  resolution.w = 100 / CONFIG.screen.base.w * canvas.width;
-  resolution.h = 100 / CONFIG.screen.base.h * canvas.height;
-}
 
 function checkAllowFullScr() {
   var
