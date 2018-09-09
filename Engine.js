@@ -103,6 +103,10 @@ function difficultyText() {
       : String.fromCharCode(9734)) + "Hard";
 }
 
+function drawGameName(txt) {
+  displayText(txt.txt, txt.init_x, txt.init_y, CONFIG.thirdColour, 50);
+}
+
 function drawMenuText(txt, pointer) {
   setTextSize(txt);
   displayText(txt.txt, txt.init_x, txt.init_y,

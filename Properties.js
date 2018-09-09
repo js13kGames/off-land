@@ -63,7 +63,8 @@ function reloadConfig(diff) {
       }
     },
     mainColour: 'white',
-    secondColour: 'teal'
+    secondColour: 'teal',
+    thirdColour: '#15c7c2'
   };
 }
 

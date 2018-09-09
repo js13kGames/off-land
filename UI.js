@@ -34,8 +34,9 @@ function colorRect(x, y, w, h, drawColor) {
   ctx.fillRect(x, y, w, h);
 }
 
-function displayText(txt, x, y, color) {
-  ctx.font = changeResolution(20, resolution.w) + "px Trebuchet MS";
+function displayText(txt, x, y, color, size) {
+  size = size ? size : 20;
+  ctx.font = changeResolution(size, resolution.w) + "px Trebuchet MS";
   ctx.shadowColor = "grey";
   ctx.fillStyle = color ? color : CONFIG.mainColour;
   ctx.fillText(txt, x, y);

@@ -9,7 +9,7 @@ function Help() {
 
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
     this.argument = new TextUI(
-        "Mr. Hans is lost in the vast Space and completely offline", posH,
+        "Mr. Bowman is lost in the vast Space and completely offline", posH,
         verticalPosition(0));
     this.mission = new TextUI(
         "Collect all the radio transmitter components and find the way back home ",
@@ -38,8 +38,8 @@ function Help() {
 
   this.draw = function () {
     drawBackground();
-    drawHelpText(this.argument, CONFIG.secondColour);
-    drawHelpText(this.mission, CONFIG.secondColour);
+    drawHelpText(this.argument, CONFIG.thirdColour);
+    drawHelpText(this.mission, CONFIG.thirdColour);
     drawHelpText(this.shield);
     displayImage(this.level.shield.img, this.shield.xw + 10, this.shield.y,
         changeResolution(this.level.shield.width, resolution.w),
