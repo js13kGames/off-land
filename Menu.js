@@ -37,7 +37,8 @@ function Menu() {
     } else if (checkCollision(this.help, this.pointer)) {
       game = new Help();
     } else if (allowFullScr && checkCollision(this.fullScreen, this.pointer)) {
-      openFullscreen();
+      //openFullscreen();
+      game = new Animation();
     }
   };
 
