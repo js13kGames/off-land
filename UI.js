@@ -97,6 +97,7 @@ function resizeScreen() {
   from = {w: canvas.width, h: canvas.height};
   setCanvasSize();
   reloadConfig(difficulty);
+  generateStaticStars();
   game.calculations(from, {w: canvas.width, h: canvas.height});
 }
 

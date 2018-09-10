@@ -55,11 +55,11 @@ function reloadConfig(diff) {
       y: 300,
     },
     player: {
-      w: changeResolution(50, resolution.w),
-      h: changeResolution(50, resolution.h),
+      w: changeResolution(40, resolution.w),
+      h: changeResolution(30, resolution.h),
       grow: {
         h: changeResolution(3, resolution.h),
-        w: changeResolution(3, resolution.w)
+        w: changeResolution(2, resolution.w)
       }
     },
     mainColour: 'white',
