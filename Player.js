@@ -1,4 +1,4 @@
-function Player(x, y, h, w) {
+function Player(x, y, w, h) {
   this.e = new ElementUI(x, y, h, w);
   var maxShield = 100;
   this.shield = 0;

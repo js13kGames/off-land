@@ -32,6 +32,40 @@ function drawStats() {
   displayText("Level " + level.lvl, 25, CONFIG.screen.h - 20);
 }
 
+function drawPreGameText(){
+  var textContinue = new TextUI(
+      "Left click to start", CONFIG.screen.w / 4,
+      CONFIG.screen.h / 2);
+  drawTitle(textContinue);
+}
+
+function drawBackground() {
+  if (backImg) {
+    displayImage(backImg, 0, 0, canvas.width, canvas.height);
+  } else {
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    drawStars();
+    backImg = new Image();
+    backImg.src = canvas.toDataURL();
+    generateDynamicStars();
+  }
+}
+
+function drawPlanet(currentLevel) {
+  new Planet(PLANET[currentLevel - 1]);
+}
+
+function drawStars() {
+  for (var i = 0; i < starList.length; i++) {
+    var s = starList[i];
+    s.move(i);
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, 360);
+    ctx.fillStyle = "hsl(" + s.hue + ", " + s.sat + "%, 88%)";
+    ctx.fill();
+  }
+}
+
 function drawAI() {
   for (var i = 0; i < level.ai.list.length; i++) {
     var a = level.ai.list[i];
@@ -75,6 +109,7 @@ function checkShieldCollision() {
 function checkLevelStatus() {
   if ((level.food.list.length === 0)) {
     if (level.lvl == LEVEL_CONFIG.levels) {
+      player = undefined;
       game = new ScreenUI(ScreenType.win);
       stopSong();
       playSound(SOUNDSGAME.win);
@@ -82,6 +117,7 @@ function checkLevelStatus() {
       game.nextLevel();
     }
   } else if (game.hasLost()) {
+    player = undefined;
     game = new ScreenUI(ScreenType.lost);
     stopSong();
     playSound(SOUNDSGAME.lose);
@@ -101,6 +137,10 @@ function difficultyText() {
       : String.fromCharCode(9734)) + "Normal";
   game.hard.txt = ((difficulty == 2) ? String.fromCharCode(9733)
       : String.fromCharCode(9734)) + "Hard";
+}
+
+function drawTitle(txt) {
+  displayText(txt.txt, txt.init_x, txt.init_y, CONFIG.thirdColour, 50);
 }
 
 function drawMenuText(txt, pointer) {

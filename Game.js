@@ -1,6 +1,7 @@
 function Game() {
   var currentLevel = CONFIG.start;
   this.life = CONFIG.life;
+  this.preGame = true;
   // Start New Level
   this.start = function () {
     level = new Level(currentLevel);
@@ -13,8 +14,10 @@ function Game() {
   };
 
   this.nextLevel = function () {
+    this.generateStaticImages();
     currentLevel = (currentLevel === LEVEL_CONFIG.levels) ? CONFIG.start
         : currentLevel + 1;
+    this.preGame = true;
     this.start();
   };
 
@@ -22,6 +25,11 @@ function Game() {
     currentLevel = CONFIG.start;
     this.life = CONFIG.life;
     this.start();
+  };
+
+  this.generateStaticImages = function () {
+    generateStaticStars();
+    backImg = null;
   };
 
   this.hasLost = function () {
@@ -33,23 +41,41 @@ function Game() {
   };
 
   this.click = function (pos) {
+    if (game.preGame) {
+      game.preGame = false;
+    }
   };
 
   this.draw = function () {
+    this.preGame ? this.drawPreGame() : this.drawGame();
+  };
+
+  this.drawGame = function () {
     drawBackground();
+    drawStars();
     drawPlanet(currentLevel);
     checkFoodCollision();
     checkShieldCollision();
     checkTimeFreezeCollision();
 
+    drawStats();
     drawPlayer();
     drawFood();
     drawShield();
     drawTimeFreeze();
     drawAI();
-    drawStats();
+
 
     checkLevelStatus();
+  };
+
+  this.drawPreGame = function () {
+    drawStats();
+    drawBackground();
+    drawStars();
+    drawPlanet(currentLevel);
+    drawAI();
+    drawPreGameText();
   };
 
   this.calculations = function (from, to) {

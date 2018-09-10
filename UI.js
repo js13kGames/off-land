@@ -1,32 +1,26 @@
-function drawBackground() {
-  colorRect(0, 0, canvas.width, canvas.height, 'black');
-  drawStars();
-}
-
-function drawPlanet(currentLevel) {
-  new Planet(PLANET[currentLevel - 1]);
-}
-
-function drawStars() {
-  for (var i = 0; i < starList.length; i++) {
-    var s = starList[i];
-    s.move(i);
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, 360);
-    ctx.fillStyle = "hsl(" + s.hue + ", " + s.sat + "%, 88%)";
-    ctx.fill();
-  }
-}
-
 function calculateMousePos(evt) {
   var rect = canvas.getBoundingClientRect();
   var root = document.documentElement;
   var mouseX = evt.clientX - rect.left - root.scrollLeft;
   var mouseY = evt.clientY - rect.top - root.scrollTop;
+  var maxXCoef = player ? player.e.w : 0;
+  var maxYCoef = player ? player.e.h : 0;
+
   return {
-    x: mouseX,
-    y: mouseY
+    x: getPositionOnCanvas(mouseX, maxXCoef, canvas.width),
+    y: getPositionOnCanvas(mouseY, maxYCoef, canvas.height)
   };
+}
+
+function getPositionOnCanvas(mouseAxis, maxCoef, canvasAxis){
+  if(mouseAxis < 0)
+    return 0;
+
+  var maxAxis = canvasAxis - maxCoef;
+  if(mouseAxis > maxAxis)
+    return maxAxis;
+
+  return mouseAxis
 }
 
 function colorRect(x, y, w, h, drawColor) {
@@ -34,8 +28,9 @@ function colorRect(x, y, w, h, drawColor) {
   ctx.fillRect(x, y, w, h);
 }
 
-function displayText(txt, x, y, color) {
-  ctx.font = changeResolution(20, resolution.w) + "px Trebuchet MS";
+function displayText(txt, x, y, color, size) {
+  size = size ? size : 20;
+  ctx.font = changeResolution(size, resolution.w) + "px Trebuchet MS";
   ctx.shadowColor = "grey";
   ctx.fillStyle = color ? color : CONFIG.mainColour;
   ctx.fillText(txt, x, y);
@@ -70,11 +65,12 @@ function openFullscreen() {
 }
 
 var from;
+
 function resizeScreen() {
   from = {w: canvas.width, h: canvas.height};
   setCanvasSize();
   reloadConfig(difficulty);
-  generateStars();
+  generateStaticStars();
   game.calculations(from, {w: canvas.width, h: canvas.height});
 }
 

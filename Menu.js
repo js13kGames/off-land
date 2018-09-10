@@ -2,14 +2,16 @@ function Menu() {
 
   this.calculations = function () {
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+    this.title = new TextUI("O  F  F    L  A  N  D", CONFIG.screen.w / 4, CONFIG.screen.h
+        / 4);
     this.start = new TextUI("Start Game", CONFIG.screen.w / 3, CONFIG.screen.h
-        / 3);
+        / 2.5);
     this.normal = new TextUI("Normal", CONFIG.screen.w / 3,
-        (CONFIG.screen.h / 3)
+        (CONFIG.screen.h / 2.5)
         + changeResolution(50, resolution.w));
-    this.hard = new TextUI("Hard", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
+    this.hard = new TextUI("Hard", CONFIG.screen.w / 3, (CONFIG.screen.h / 2.5)
         + changeResolution(100, resolution.w));
-    this.help = new TextUI("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 3)
+    this.help = new TextUI("HELP", CONFIG.screen.w / 3, (CONFIG.screen.h / 2.5)
         + changeResolution(200, resolution.w));
     if (allowFullScr) {
       this.fullScreen = new TextUI(
@@ -45,6 +47,7 @@ function Menu() {
   this.draw = function (timer) {
     drawBackground(timer);
     difficultyText();
+    drawTitle(this.title);
     drawMenuText(this.start, this.pointer);
     drawMenuText(this.normal, this.pointer);
     drawMenuText(this.hard, this.pointer);

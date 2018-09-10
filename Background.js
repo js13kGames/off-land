@@ -10,8 +10,8 @@ function star(x, y, r, hue, sat) {
   this.x = x;
   this.y = y;
   this.r = r;
-  this.xCoef = this.r / 10;
-  this.yCoef = this.r / 2;
+  this.xCoef = -this.r / 20;
+  this.yCoef = this.r / 5;
   this.hue = hue;
   this.sat = sat;
 
@@ -21,14 +21,21 @@ function star(x, y, r, hue, sat) {
   };
 };
 
-function generateStars() {
+function generateStaticStars() {
+  generateStars(100, 1.2);
+}
+
+function generateDynamicStars() {
+  generateStars(30, 2);
+}
+
+function generateStars(starsQty, size) {
   starList = [];
-  var starsQty = 200;
   var colorrange = [0, 60, 240];
   for (var i = 0; i < starsQty; i++) {
     var x = Math.random() * CONFIG.screen.w;
     var y = Math.random() * CONFIG.screen.h;
-    var radius = Math.random() * 1.2;
+    var radius = Math.random() * size;
     var hue = colorrange[random(colorrange.length - 1)];
     var sat = random(50) + 50;
     starList.push(new star(x, y, radius, hue, sat));

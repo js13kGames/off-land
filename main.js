@@ -1,4 +1,4 @@
-var div, canvas, ctx, level, player, game,
+var div, canvas, ctx, level, player, game, backImg,
     resolution = {w: 100, h: 100, planet: 100}, allowFullScr = true;
 
 function determineResolution() {
@@ -18,7 +18,7 @@ window.onload = function () {
   generateAllSounds();
   game = new Menu();
 
-  canvas.addEventListener('mousemove',
+  window.addEventListener('mousemove',
       function (e) {
         var pos = calculateMousePos(e);
         game.mousemove(pos);
@@ -34,7 +34,7 @@ window.onload = function () {
     resizeScreen();
   };
 
-  generateStars();
+  generateStaticStars();
 
   function drawCanvasGame() {
     game.draw();
@@ -54,8 +54,10 @@ function checkAllowFullScr() {
   allowFullScr = nIdx == -1;
 }
 
-function setStyles(){
+function setStyles() {
   canvas.style.cssText = "cursor:none;position:absolute;left:0;right:0;margin:auto;border:#474747 dotted;";
-  document.getElementsByTagName("body")[0].style.cssText = "overflow:hidden;background:#000;";
-  document.getElementsByTagName("html")[0].style.cssText = "overflow:hidden;background:#000;";
+  document.getElementsByTagName(
+      "body")[0].style.cssText = "overflow:hidden;background:#000;";
+  document.getElementsByTagName(
+      "html")[0].style.cssText = "overflow:hidden;background:#000;";
 }
