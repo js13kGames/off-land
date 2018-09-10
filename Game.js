@@ -1,6 +1,7 @@
 function Game() {
   var currentLevel = CONFIG.start;
   this.life = CONFIG.life;
+  this.preGame = true;
   // Start New Level
   this.start = function () {
     level = new Level(currentLevel);
@@ -16,6 +17,7 @@ function Game() {
     this.generateStaticImages();
     currentLevel = (currentLevel === LEVEL_CONFIG.levels) ? CONFIG.start
         : currentLevel + 1;
+    this.preGame = true;
     this.start();
   };
 
@@ -39,9 +41,15 @@ function Game() {
   };
 
   this.click = function (pos) {
+    if(game.preGame)
+      game.preGame = false;
   };
 
   this.draw = function () {
+    this.preGame ? this.drawPreGame() : this.drawGame();
+  };
+
+  this.drawGame = function () {
     drawBackground();
     drawStars();
     drawPlanet(currentLevel);
@@ -59,27 +67,39 @@ function Game() {
     checkLevelStatus();
   };
 
-  this.calculations = function (from, to) {
-    player.e.w = CONFIG.player.w;
-    player.e.h = CONFIG.player.h;
-    player.e.relocate();
-    if (player.shield <= 0) {
-      player.addShield(1);
-    }
-    relocateEveryone(from, to);
-  }
+  this.drawPreGame = function () {
+    drawBackground();
+    drawStars();
+    drawPlanet(currentLevel);
+    drawAI();
+    drawStats();
+    var textContinue = new TextUI(
+        "Left click to start", CONFIG.screen.w / 4,
+        CONFIG.screen.h / 2);
+    drawGameName(textContinue);
+};
 
-  function relocateEveryone(from, to) {
-    var x_p = 0, y_p = 0;
-    if (from.w !== to.w && from.h !== to.h) {
-      x_p = 100 / from.w * to.w;
-      y_p = 100 / from.h * to.h;
-      relocateItemList(level.ai.list, x_p, y_p, true);
-      relocateItemList(level.shield.list, x_p, y_p);
-      relocateItemList(level.timeFreeze.list, x_p, y_p);
-      relocateItemList(level.food.list, x_p, y_p);
-      relocateItemList([player], x_p, y_p, true);
-    }
+this.calculations = function (from, to) {
+  player.e.w = CONFIG.player.w;
+  player.e.h = CONFIG.player.h;
+  player.e.relocate();
+  if (player.shield <= 0) {
+    player.addShield(1);
   }
+  relocateEveryone(from, to);
+}
+
+function relocateEveryone(from, to) {
+  var x_p = 0, y_p = 0;
+  if (from.w !== to.w && from.h !== to.h) {
+    x_p = 100 / from.w * to.w;
+    y_p = 100 / from.h * to.h;
+    relocateItemList(level.ai.list, x_p, y_p, true);
+    relocateItemList(level.shield.list, x_p, y_p);
+    relocateItemList(level.timeFreeze.list, x_p, y_p);
+    relocateItemList(level.food.list, x_p, y_p);
+    relocateItemList([player], x_p, y_p, true);
+  }
+}
 
 }
