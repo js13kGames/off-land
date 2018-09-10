@@ -46,7 +46,7 @@ function Menu() {
   this.draw = function (timer) {
     drawBackground(timer);
     difficultyText();
-    drawGameName(this.title);
+    drawTitle(this.title);
     drawMenuText(this.start, this.pointer);
     drawMenuText(this.normal, this.pointer);
     drawMenuText(this.hard, this.pointer);

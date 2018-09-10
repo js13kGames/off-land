@@ -25,6 +25,6 @@ function ScreenUI(state) {
 }
 
 var ScreenType = {
-  lost: "You Lost",
-  win: "Congratulations!"
+  lost: "You Lost. Click to play again.",
+  win: "Congratulations! Mr Bowman can call his mum now"
 };

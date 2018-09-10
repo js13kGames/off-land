@@ -58,26 +58,24 @@ function Game() {
     checkShieldCollision();
     checkTimeFreezeCollision();
 
+    drawStats();
     drawPlayer();
     drawFood();
     drawShield();
     drawTimeFreeze();
     drawAI();
-    drawStats();
+
 
     checkLevelStatus();
   };
 
   this.drawPreGame = function () {
+    drawStats();
     drawBackground();
     drawStars();
     drawPlanet(currentLevel);
     drawAI();
-    drawStats();
-    var textContinue = new TextUI(
-        "Left click to start", CONFIG.screen.w / 4,
-        CONFIG.screen.h / 2);
-    drawGameName(textContinue);
+    drawPreGameText();
   };
 
   this.calculations = function (from, to) {

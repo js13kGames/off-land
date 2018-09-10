@@ -1,30 +1,3 @@
-function drawBackground() {
-  if (backImg) {
-    displayImage(backImg, 0, 0, canvas.width, canvas.height);
-  } else {
-    colorRect(0, 0, canvas.width, canvas.height, 'black');
-    drawStars();
-    backImg = new Image();
-    backImg.src = canvas.toDataURL();
-    generateDynamicStars();
-  }
-}
-
-function drawPlanet(currentLevel) {
-  new Planet(PLANET[currentLevel - 1]);
-}
-
-function drawStars() {
-  for (var i = 0; i < starList.length; i++) {
-    var s = starList[i];
-    s.move(i);
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, 360);
-    ctx.fillStyle = "hsl(" + s.hue + ", " + s.sat + "%, 88%)";
-    ctx.fill();
-  }
-}
-
 function calculateMousePos(evt) {
   var rect = canvas.getBoundingClientRect();
   var root = document.documentElement;

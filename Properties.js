@@ -55,8 +55,8 @@ function reloadConfig(diff) {
       y: 300,
     },
     player: {
-      w: changeResolution(40, resolution.w),
-      h: changeResolution(30, resolution.h),
+      w: changeResolution(30, resolution.w),
+      h: changeResolution(40, resolution.h),
       grow: {
         h: changeResolution(3, resolution.h),
         w: changeResolution(2, resolution.w)
