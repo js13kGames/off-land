@@ -1,64 +1,42 @@
 var items = [];
-
+var satellite = {};
+var earth = {};
 function Animation() {
   this.seconds = 0;
   this.objects = {};
 
   player = new Player(CONFIG.initPos.x, CONFIG.initPos.y, CONFIG.player.w,
       CONFIG.player.h);
+  satellite = new Image();
+  satellite.src = imgBase64(IMGS.satellite);
+  earth = new Image();
+  earth.src = imgBase64(IMGS.earth);
 
   this.objects.f = [];
 
-  var sw = CONFIG.screen.w, sh = CONFIG.screen.h, sw2 = sw / 2,
-      itemVelocity = 1;
-  var pickupsFlows = [
-    [
-      [25, 20, itemVelocity],
-      [5, 35, itemVelocity * 2],
-      [25, 55, itemVelocity * 3],
-      [50, 50, itemVelocity * 4],
-    ],
-    [
-      [75, 20, itemVelocity],
-      [95, 35, itemVelocity * 2],
-      [75, 55, itemVelocity * 3],
-      [50, 50, itemVelocity * 4],
-    ],
-    [
-      [85, 25, itemVelocity],
-      [100, 40, itemVelocity * 2],
-      [85, 60, itemVelocity * 3],
-      [50, 50, itemVelocity * 4],
-    ],
-    [
-      [15, 10, itemVelocity],
-      [0, 25, itemVelocity * 2],
-      [15, 45, itemVelocity * 3],
-      [50, 50, itemVelocity * 4],
-    ],
-    [
-      [85, 25, itemVelocity],
-      [100, 40, itemVelocity * 2],
-      [85, 60, itemVelocity * 3],
-      [50, 50, itemVelocity * 4],
-    ],
-    [
-      [85, 25, itemVelocity],
-      [100, 40, itemVelocity * 2],
-      [85, 60, itemVelocity * 3],
-      [50, 50, itemVelocity * 4],
-    ],
-    [
-      [85, 25, itemVelocity],
-      [100, 40, itemVelocity * 2],
-      [85, 60, itemVelocity * 3],
-      [50, 50, itemVelocity * 4],
-    ],
-  ];
+  var t = [2, 3, 4, 5, 6];
+  var flow_pos_y = [20, 15, 10, 5, 10, 15, 20];
+  var pickupsFlows = [];
 
-  for (var k = 0; k < pickupsFlows.length; k++) {
+  for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
+    var posx = (100/9*(k+1));
+    pickupsFlows.push(
+        [
+          [posx, flow_pos_y[k], t[0]],
+          [posx, flow_pos_y[k]-2, t[1]],
+          [posx, flow_pos_y[k]+1, t[2]],
+          [posx, flow_pos_y[k]-2, t[3]],
+          [50, 50, t[4]],
+        ]
+    );
+
     this.objects.f.push(new AnimationEngine(pickupsFlows[k],
-        49, 76, false
+        {
+          init_x: 49,
+          init_y: 76,
+          init_time: 0,
+          loop: false
+        }
     ));
     this.objects.f[k].index = k;
     items.push((new Level(k + 1)).food);
@@ -71,19 +49,64 @@ function Animation() {
 
   this.objects.player = new AnimationEngine(
       [
-        [50, 78, 1],
-        [52, 75, 3],
-        [49, 77, 5],
-        [51, 76, 7],
+        [45, 78, 1],
+        [47, 75, 3],
+        [46, 77, 5],
+        [48, 76, 6],
       ],
-      49, 76,
-      true
+      {
+        init_x: 49,
+        init_y: 76,
+        init_time: 0,
+        loop: true
+      }
   );
   this.objects.player.draw = function () {
     displayImage(player.skins.normal, this.pos.x,
         this.pos.y,
         changeResolution(player.e.w, resolution.w),
         changeResolution(player.e.h, resolution.h));
+  };
+
+
+  this.objects.satellite = new AnimationEngine(
+      [
+        [51, 49, 8],
+        [49, 50, 10],
+        [50, 48, 12],
+        [49, 50, 14],
+      ],
+      {
+        init_x: 46,
+        init_y: 45,
+        init_time: 6,
+        loop: true
+      }
+  );
+  this.objects.satellite.draw = function () {
+    displayImage(satellite, this.pos.x,
+        this.pos.y,
+        changeResolution(95, resolution.w),
+        changeResolution(95, resolution.h));
+  };
+
+
+  this.objects.earth = new AnimationEngine(
+      [
+        [80, 20, 8],
+      ],
+      {
+        init_x: 80,
+        init_y: 20,
+        init_time: 6,
+        loop: true
+      }
+  );
+  this.objects.earth.draw = function () {
+    displayImage(earth, this.pos.x,
+        this.pos.y,
+        changeResolution(30, resolution.w),
+        changeResolution(30, resolution.h));
   };
 
   this.mousemove = function (pos) {
@@ -102,6 +125,8 @@ function Animation() {
       AnimationEngine.move(this.objects.f[k], this.seconds);
     }
     AnimationEngine.move(this.objects.player, this.seconds);
+    AnimationEngine.move(this.objects.satellite, this.seconds);
+    AnimationEngine.move(this.objects.earth, this.seconds);
     drawPointer();
   };
 
