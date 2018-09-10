@@ -18,7 +18,7 @@ window.onload = function () {
   generateAllSounds();
   game = new Menu();
 
-  canvas.addEventListener('mousemove',
+  window.addEventListener('mousemove',
       function (e) {
         var pos = calculateMousePos(e);
         game.mousemove(pos);

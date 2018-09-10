@@ -30,10 +30,24 @@ function calculateMousePos(evt) {
   var root = document.documentElement;
   var mouseX = evt.clientX - rect.left - root.scrollLeft;
   var mouseY = evt.clientY - rect.top - root.scrollTop;
+  var maxXCoef = player ? player.e.w : 0;
+  var maxYCoef = player ? player.e.h : 0;
+
   return {
-    x: mouseX,
-    y: mouseY
+    x: getPositionOnCanvas(mouseX, maxXCoef, canvas.width),
+    y: getPositionOnCanvas(mouseY, maxYCoef, canvas.height)
   };
+}
+
+function getPositionOnCanvas(mouseAxis, maxCoef, canvasAxis){
+  if(mouseAxis < 0)
+    return 0;
+
+  var maxAxis = canvasAxis - maxCoef;
+  if(mouseAxis > maxAxis)
+    return maxAxis;
+
+  return mouseAxis
 }
 
 function colorRect(x, y, w, h, drawColor) {
