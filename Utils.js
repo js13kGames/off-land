@@ -3,9 +3,10 @@ function random(max) {
 }
 
 function generate(item, space, itemObj) {
+  var safeLocation = 5;
   for (var i = 0; i < item.qty; i++) {
-    var x = random(space.w - item.width);
-    var y = random(space.h - item.height);
+    var x = random(space.w - item.width - safeLocation);
+    var y = random(space.h - item.height - safeLocation);
     item.list.push(new itemObj(x, y, item.width, item.height));
   }
 }

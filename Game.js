@@ -53,7 +53,6 @@ function Game() {
 
   this.drawGame = function () {
     drawBackground();
-    drawStars();
     drawPlanet(currentLevel);
     checkFoodCollision();
     checkShieldCollision();
@@ -72,7 +71,6 @@ function Game() {
 
   this.drawPreGame = function () {
     drawBackground();
-    drawStars();
     drawPlanet(currentLevel);
     drawStats();
     drawAI();
