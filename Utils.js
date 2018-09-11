@@ -47,6 +47,7 @@ function TextUI(txt, x, y) {
   this.y = 0;
   this.xw = 0;
   this.yh = 0;
+  this.e = {w: 5, h: 5};
 }
 
 function changeResolution(val, change){

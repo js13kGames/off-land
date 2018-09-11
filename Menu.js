@@ -2,6 +2,7 @@ function Menu() {
 
   this.calculations = function () {
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+    pointer = this.pointer;
     this.title = new TextUI("O  F  F    L  A  N  D", CONFIG.screen.w / 4, CONFIG.screen.h
         / 4);
     this.start = new TextUI("Start Game", CONFIG.screen.w / 3, CONFIG.screen.h
@@ -39,8 +40,7 @@ function Menu() {
     } else if (checkCollision(this.help, this.pointer)) {
       game = new Help();
     } else if (allowFullScr && checkCollision(this.fullScreen, this.pointer)) {
-      //openFullscreen();
-      game = new Animation();
+      openFullscreen();
     }
   };
 

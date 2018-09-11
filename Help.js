@@ -8,6 +8,7 @@ function Help() {
     posH = CONFIG.screen.w / 5;
 
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+    pointer = this.pointer;
     this.argument = new TextUI(
         "Mr. Bowman is lost in the vast Space and completely offline", posH,
         verticalPosition(0));

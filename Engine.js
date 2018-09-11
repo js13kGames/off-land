@@ -108,8 +108,7 @@ function checkShieldCollision() {
 
 function checkLevelStatus() {
   if ((level.food.list.length === 0)) {
-    if (level.lvl == LEVEL_CONFIG.levels) {
-      player = undefined;
+    if (level.lvl === LEVEL_CONFIG.levels) {
       game = new ScreenUI(ScreenType.win);
       stopSong();
       playSound(SOUNDSGAME.win);
@@ -117,7 +116,6 @@ function checkLevelStatus() {
       game.nextLevel();
     }
   } else if (game.hasLost()) {
-    player = undefined;
     game = new ScreenUI(ScreenType.lost);
     stopSong();
     playSound(SOUNDSGAME.lose);

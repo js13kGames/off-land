@@ -1,6 +1,7 @@
 var items = [];
 var satellite = {};
 var earth = {};
+
 function Animation() {
   this.seconds = 0;
   this.objects = {};
@@ -19,13 +20,13 @@ function Animation() {
   var pickupsFlows = [];
 
   for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
-    var posx = (100/9*(k+1));
+    var posx = (100 / 9 * (k + 1));
     pickupsFlows.push(
         [
           [posx, flow_pos_y[k], t[0]],
-          [posx, flow_pos_y[k]-2, t[1]],
-          [posx, flow_pos_y[k]+1, t[2]],
-          [posx, flow_pos_y[k]-2, t[3]],
+          [posx, flow_pos_y[k] - 2, t[1]],
+          [posx, flow_pos_y[k] + 1, t[2]],
+          [posx, flow_pos_y[k] - 2, t[3]],
           [50, 50, t[4]],
         ]
     );
@@ -35,7 +36,8 @@ function Animation() {
           init_x: 49,
           init_y: 76,
           init_time: 0,
-          loop: false
+          loop: false,
+          end: 6
         }
     ));
     this.objects.f[k].index = k;
@@ -68,7 +70,6 @@ function Animation() {
         changeResolution(player.e.h, resolution.h));
   };
 
-
   this.objects.satellite = new AnimationEngine(
       [
         [51, 49, 8],
@@ -90,7 +91,6 @@ function Animation() {
         changeResolution(95, resolution.h));
   };
 
-
   this.objects.earth = new AnimationEngine(
       [
         [80, 20, 8],
@@ -109,29 +109,37 @@ function Animation() {
         changeResolution(30, resolution.h));
   };
 
-  this.mousemove = function (pos) {
-    this.pointer.init_x = pos.x;
-    this.pointer.init_y = pos.y;
-  };
+  this.objects.signal = [];
+  for (var k = 0; k < 5; k++){
+    this.objects.signal.push(new AnimationEngine(
+        [],
+        {
+          init_x: 60,
+          init_y: 50,
+          init_time: 9 + k
+        }
+    ));
+    this.objects.signal[k].index = k;
+    this.objects.signal[k].draw = function () {
+      displayArc(this.pos.x, this.pos.y, 40 * (this.index+1), 1.5, 0, "green", 7+this.index);
+    }
+  }
 
-  this.click = function (pos) {
-    game = new Menu();
-  };
   this.draw = function () {
     this.seconds += 0.017;
-    drawBackground();
-
-    for (var k = 0; k < 7; k++) {
-      AnimationEngine.move(this.objects.f[k], this.seconds);
+    for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
+      AnimationEngine.draw(this.objects.f[k], this.seconds);
     }
-    AnimationEngine.move(this.objects.player, this.seconds);
-    AnimationEngine.move(this.objects.satellite, this.seconds);
-    AnimationEngine.move(this.objects.earth, this.seconds);
-    drawPointer();
+    AnimationEngine.draw(this.objects.player, this.seconds);
+    AnimationEngine.draw(this.objects.satellite, this.seconds);
+    AnimationEngine.draw(this.objects.earth, this.seconds);
+
+    for (var k = 0; k < this.objects.signal.length; k++) {
+      AnimationEngine.draw(this.objects.signal[k], this.seconds);
+    }
   };
 
   this.calculations = function () {
-    this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
   };
 
   this.calculations();

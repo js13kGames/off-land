@@ -1,7 +1,12 @@
+var animation = {};
 function ScreenUI(state) {
+  this.state = state;
+  this.state.start();
+
   this.calculations = function () {
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
-    this.main = new TextUI(state, CONFIG.screen.w / 3, CONFIG.screen.h / 3);
+    pointer = this.pointer;
+    this.state.calculations();
   };
   //10132
   //9732
@@ -13,18 +18,43 @@ function ScreenUI(state) {
   };
 
   this.click = function (pos) {
+    player = undefined;
     game = new Menu();
   };
 
   this.draw = function () {
     drawBackground();
-    drawHelpText(this.main);
+
+    this.state.draw();
+
     drawPointer();
   };
   this.calculations();
 }
 
 var ScreenType = {
-  lost: "You Lost. Click to play again.",
-  win: "Congratulations! Mr Bowman can call his mum now"
+  lost: {
+    start: function(){},
+    calculations: function(){
+      this.text = "You Lost. Click to play again.";
+      this.main = new TextUI(this.text, CONFIG.screen.w / 3, CONFIG.screen.h / 3);
+    },
+    draw: function(){
+      drawHelpText(this.main);
+    }
+  },
+  win: {
+    start: function(){
+      animation = new Animation();
+    },
+    calculations: function(){
+      this.text = "Congratulations! Mr Bowman can call his mum now";
+      this.main = new TextUI(this.text, CONFIG.screen.w / 3, CONFIG.screen.h / 16);
+      animation.calculations();
+    },
+    draw: function(){
+      drawHelpText(this.main);
+      animation.draw();
+    }
+  }
 };

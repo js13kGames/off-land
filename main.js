@@ -1,4 +1,4 @@
-var div, canvas, ctx, level, player, game, backImg,
+var div, canvas, ctx, level, player, pointer, game, backImg,
     resolution = {w: 100, h: 100, planet: 100}, allowFullScr = true;
 
 function determineResolution() {

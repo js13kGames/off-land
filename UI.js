@@ -3,8 +3,8 @@ function calculateMousePos(evt) {
   var root = document.documentElement;
   var mouseX = evt.clientX - rect.left - root.scrollLeft;
   var mouseY = evt.clientY - rect.top - root.scrollTop;
-  var maxXCoef = player ? player.e.w : 0;
-  var maxYCoef = player ? player.e.h : 0;
+  var maxXCoef = pointer ? pointer.e.w : 0;
+  var maxYCoef = pointer ? pointer.e.h : 0;
 
   return {
     x: getPositionOnCanvas(mouseX, maxXCoef, canvas.width),
@@ -35,6 +35,15 @@ function displayText(txt, x, y, color, size) {
   ctx.fillStyle = color ? color : CONFIG.mainColour;
   ctx.fillText(txt, x, y);
   ctx.fillStyle = CONFIG.mainColour;
+}
+
+function displayArc(x, y, r, as, ae, colour, size){
+  ctx.strokeStyle = colour;
+  ctx.lineWidth=size;
+  ctx.lineCap="round";
+  ctx.beginPath();
+  ctx.arc(x, y, changeResolution(r, resolution.w), as * Math.PI, ae * Math.PI, false);
+  ctx.stroke();
 }
 
 function setTextSize(arg) {
