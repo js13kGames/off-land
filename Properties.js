@@ -26,7 +26,7 @@ function reloadConfig(diff) {
 
   CONFIG = {
     life: 5,
-    restoreLife: 0.25,
+    restoreLife: 0.15,
     start: 1,
     shield: {
       start: 5,

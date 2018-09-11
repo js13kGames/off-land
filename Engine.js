@@ -49,6 +49,7 @@ function drawBackground() {
     backImg.src = canvas.toDataURL();
     generateDynamicStars();
   }
+  drawStars();
 }
 
 function drawPlanet(currentLevel) {
