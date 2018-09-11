@@ -1,4 +1,5 @@
 var animation = {};
+
 function ScreenUI(state) {
   this.state = state;
   this.state.start();
@@ -18,8 +19,7 @@ function ScreenUI(state) {
   };
 
   this.click = function (pos) {
-    player = undefined;
-    game = new Menu();
+    this.state.click(pos);
   };
 
   this.draw = function () {
@@ -34,27 +34,40 @@ function ScreenUI(state) {
 
 var ScreenType = {
   lost: {
-    start: function(){},
-    calculations: function(){
-      this.text = "You Lost. Click to play again.";
-      this.main = new TextUI(this.text, CONFIG.screen.w / 3, CONFIG.screen.h / 3);
+    start: function () {
     },
-    draw: function(){
+    calculations: function () {
+      this.text = "You Lost. Click to play again.";
+      this.main = new TextUI(this.text, CONFIG.screen.w / 3,
+          CONFIG.screen.h / 3);
+    },
+    draw: function () {
       drawHelpText(this.main);
+    },
+    click: function () {
+      game = new Menu();
     }
   },
   win: {
-    start: function(){
+    start: function () {
       animation = new Animation();
     },
-    calculations: function(){
+    calculations: function () {
       this.text = "Congratulations! Mr Bowman can call his mum now";
-      this.main = new TextUI(this.text, CONFIG.screen.w / 3, CONFIG.screen.h / 16);
+      this.main = new TextUI(this.text, CONFIG.screen.w / 3,
+          CONFIG.screen.h / 16);
       animation.calculations();
     },
-    draw: function(){
+    draw: function () {
       drawHelpText(this.main);
       animation.draw();
+    },
+    click: function () {
+      if (animation.seconds < animation.end) {
+        animation.seconds = animation.end;
+      } else {
+        game = new Menu();
+      }
     }
   }
 };

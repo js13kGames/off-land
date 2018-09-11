@@ -4,6 +4,7 @@ var earth = {};
 
 function Animation() {
   this.seconds = 0;
+  this.end = 20;
   this.objects = {};
 
   player = new Player(CONFIG.initPos.x, CONFIG.initPos.y, CONFIG.player.w,
@@ -93,7 +94,7 @@ function Animation() {
 
   this.objects.earth = new AnimationEngine(
       [
-        [80, 20, 8],
+        [],
       ],
       {
         init_x: 80,
@@ -139,7 +140,18 @@ function Animation() {
     }
   };
 
-  this.calculations = function () {
+  this.calculations = function () {this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+
+    // for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
+    //   AnimationEngine.calculations(this.objects.f[k]);
+    // }
+    // AnimationEngine.calculations(this.objects.player);
+    // AnimationEngine.calculations(this.objects.satellite);
+    // AnimationEngine.calculations(this.objects.earth);
+    //
+    // for (var k = 0; k < this.objects.signal.length; k++) {
+    //   AnimationEngine.calculations(this.objects.signal[k]);
+    // }
   };
 
   this.calculations();
