@@ -51,7 +51,7 @@ function reloadConfig(diff) {
     lifeCharCode: 10084,
     initPos: {
       x: 400,
-      y: 300,
+      y: 300
     },
     player: {
       w: changeResolution(30, resolution.w),
