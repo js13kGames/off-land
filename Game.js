@@ -70,9 +70,9 @@ function Game() {
   };
 
   this.drawPreGame = function () {
-    drawStats();
     drawBackground();
     drawPlanet(currentLevel);
+    drawStats();
     drawAI();
     drawPreGameText();
   };

@@ -52,6 +52,13 @@ AnimationEngine.draw = function (obj, sec) {
   }
 };
 
+AnimationEngine.execute = function(f, when, sec){
+  if (!f.done && when <= Math.floor(sec)){
+    f.done = true;
+    f.action();
+  }
+};
+
 AnimationEngine.calculations = function (obj) {
   obj.pos.x = changeResolution(obj.pos.x, resolution.w);
   obj.pos.y = changeResolution(obj.pos.y, resolution.h);

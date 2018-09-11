@@ -61,7 +61,7 @@ function reloadConfig(diff) {
         w: changeResolution(2, resolution.w)
       }
     },
-    mainColour: 'white',
+    mainColour: '#fff',
     secondColour: 'teal',
     thirdColour: '#15c7c2'
   };

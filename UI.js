@@ -38,12 +38,20 @@ function displayText(txt, x, y, color, size) {
 }
 
 function displayArc(x, y, r, as, ae, colour, size){
+  ctx.shadowColor = '#05632c';
+  ctx.shadowBlur = 20;
+  ctx.shadowOffsetX = 5;
+  ctx.shadowOffsetY = -5;
   ctx.strokeStyle = colour;
   ctx.lineWidth=size;
   ctx.lineCap="round";
   ctx.beginPath();
   ctx.arc(x, y, changeResolution(r, resolution.w), as * Math.PI, ae * Math.PI, false);
   ctx.stroke();
+  ctx.shadowColor = '#999';
+  ctx.shadowBlur = 0;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
 }
 
 function setTextSize(arg) {
