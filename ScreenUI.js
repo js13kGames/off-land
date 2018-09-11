@@ -53,7 +53,7 @@ var ScreenType = {
       animation = new Animation();
     },
     calculations: function () {
-      this.text = "Congratulations! Mr Bowman can call his mum now";
+      this.text = "Congratulations!";
       this.main = new TextUI(this.text, CONFIG.screen.w / 3,
           CONFIG.screen.h / 16);
       animation.calculations();

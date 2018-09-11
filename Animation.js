@@ -111,18 +111,18 @@ function Animation() {
   };
 
   this.objects.signal = [];
-  for (var k = 0; k < 5; k++) {
+  for (var k = 0; k < 6; k++) {
     this.objects.signal.push(new AnimationEngine(
         [],
         {
           init_x: 60,
-          init_y: 50,
+          init_y: 52,
           init_time: 9 + k
         }
     ));
     this.objects.signal[k].index = k;
     this.objects.signal[k].draw = function () {
-      displayArc(this.pos.x, this.pos.y, 40 * (this.index + 1), 1.5, 0, "green",
+      displayArc(this.pos.x, this.pos.y, 38 * (this.index + 1), 1.5, 0, "green",
           7 + this.index);
     }
   }
