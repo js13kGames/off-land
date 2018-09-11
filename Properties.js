@@ -12,7 +12,7 @@ var CONFIG = {
 function reloadConfig(diff) {
   difficulty = diff;
   LEVEL_CONFIG = {
-    levels: 1,
+    levels: 7,
     1: {f: 8, s: 1, a: (5 * difficulty) + 5},
     2: {f: 8, s: 2, a: (4 * difficulty) + 4},
     3: {f: 8, s: 2, a: (5 * difficulty) + 5},
@@ -59,7 +59,7 @@ function reloadConfig(diff) {
         w: changeResolution(2, resolution.w)
       }
     },
-    mainColour: 'white',
+    mainColour: '#fff',
     secondColour: 'teal',
     thirdColour: '#15c7c2'
   };

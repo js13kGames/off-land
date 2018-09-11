@@ -111,7 +111,7 @@ function Animation() {
   };
 
   this.objects.signal = [];
-  for (var k = 0; k < 5; k++){
+  for (var k = 0; k < 5; k++) {
     this.objects.signal.push(new AnimationEngine(
         [],
         {
@@ -122,12 +122,57 @@ function Animation() {
     ));
     this.objects.signal[k].index = k;
     this.objects.signal[k].draw = function () {
-      displayArc(this.pos.x, this.pos.y, 40 * (this.index+1), 1.5, 0, "green", 7+this.index);
+      displayArc(this.pos.x, this.pos.y, 40 * (this.index + 1), 1.5, 0, "green",
+          7 + this.index);
     }
   }
 
+  this.objects.chat = [];
+  var chat_size = 20;
+  var chat = [
+      ["|Man: Hello?", 1],
+      ["|Bowman: Hi there!", 2],
+      ["|Man: Who is talking?", 1],
+      ["|Bowman: Just Mr. Bowman", 2],
+  ];
+  for (var k = 0; k < chat.length; k++) {
+    this.objects.chat.push(new AnimationEngine(
+        [],
+        {
+          init_x: 10,
+          init_y: 20 + (5 * k),
+          init_time: 14 + k
+        }
+    ));
+    this.objects.chat[k].color = chat[k][1] === 1 ? CONFIG.mainColour
+        : CONFIG.secondColour;
+    this.objects.chat[k].text = chat[k][0];
+    this.objects.chat[k].size = chat_size;
+    this.objects.chat[k].draw = function () {
+      displayText(this.text, this.pos.x, this.pos.y, this.color, this.size);
+
+    }
+  }
+
+  this.objects.sounds = [];
+  this.objects.sounds.push({
+    done: false,
+    action: function(){
+      playSound(SOUNDSGAME.timeFreeze);
+    }
+  });
+  this.objects.sounds.push({
+    done: false,
+    action: function(){
+      playSound(SOUNDSGAME.shield);
+    }
+  });
   this.draw = function () {
     this.seconds += 0.017;
+
+    AnimationEngine.execute(this.objects.sounds[0],6, this.seconds);
+    AnimationEngine.execute(this.objects.sounds[1],14, this.seconds);
+
     for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
       AnimationEngine.draw(this.objects.f[k], this.seconds);
     }
@@ -138,9 +183,13 @@ function Animation() {
     for (var k = 0; k < this.objects.signal.length; k++) {
       AnimationEngine.draw(this.objects.signal[k], this.seconds);
     }
+    for (var k = 0; k < this.objects.chat.length; k++) {
+      AnimationEngine.draw(this.objects.chat[k], this.seconds);
+    }
   };
 
-  this.calculations = function () {this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
+  this.calculations = function () {
+    this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
 
     // for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
     //   AnimationEngine.calculations(this.objects.f[k]);
