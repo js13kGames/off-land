@@ -14,7 +14,7 @@ function reloadConfig(diff) {
   var speedCoef = difficulty === 1 ? 1.2 : 3;
   var aiQtyCoef = difficulty === 1 ? 1 : 1.3;
   LEVEL_CONFIG = {
-    levels: 7,
+    levels: 1,
     1: {f: 8, s: 2 * speedCoef, a: 7 * aiQtyCoef},
     2: {f: 8, s: 2.5 * speedCoef, a: 8 * aiQtyCoef},
     3: {f: 8, s: 3 * speedCoef, a: 8 * aiQtyCoef},
@@ -27,7 +27,7 @@ function reloadConfig(diff) {
   CONFIG = {
     life: 5,
     restoreLife: 0.15,
-    start: 1,
+    start: 7,
     shield: {
       start: 5,
       add: 15,
@@ -63,7 +63,7 @@ function reloadConfig(diff) {
     },
     mainColour: '#fff',
     secondColour: 'teal',
-    thirdColour: '#15c7c2'
+    thirdColour: '#0ca6b4'
   };
 }
 

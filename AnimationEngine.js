@@ -59,7 +59,10 @@ AnimationEngine.execute = function(f, when, sec){
   }
 };
 
-AnimationEngine.calculations = function (obj) {
-  obj.pos.x = changeResolution(obj.pos.x, resolution.w);
-  obj.pos.y = changeResolution(obj.pos.y, resolution.h);
+AnimationEngine.calculations = function (obj, from, to) {
+  if(from !== undefined && to !== undefined) {
+    obj.pos.x = to.w * obj.pos.x / from.w;
+    obj.pos.y = to.h * obj.pos.y / from.h;
+    obj.draw();
+  }
 };

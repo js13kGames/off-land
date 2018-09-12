@@ -4,10 +4,10 @@ function ScreenUI(state) {
   this.state = state;
   this.state.start();
 
-  this.calculations = function () {
+  this.calculations = function (from, to) {
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
     pointer = this.pointer;
-    this.state.calculations();
+    this.state.calculations(from, to);
   };
   //10132
   //9732
@@ -52,20 +52,18 @@ var ScreenType = {
     start: function () {
       animation = new Animation();
     },
-    calculations: function () {
+    calculations: function (from, to) {
       this.text = "Congratulations!";
       this.main = new TextUI(this.text, CONFIG.screen.w / 3,
           CONFIG.screen.h / 16);
-      animation.calculations();
+      animation.calculations(from, to);
     },
     draw: function () {
       drawHelpText(this.main);
       animation.draw();
     },
     click: function () {
-      if (animation.seconds < animation.end) {
-        animation.seconds = animation.end;
-      } else {
+      if (animation.seconds >= animation.end) {
         game = new Menu();
       }
     }

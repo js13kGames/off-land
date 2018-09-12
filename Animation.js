@@ -4,7 +4,7 @@ var earth = {};
 
 function Animation() {
   this.seconds = 0;
-  this.end = 20;
+  this.end = 30;
   this.objects = {};
 
   player = new Player(CONFIG.initPos.x, CONFIG.initPos.y, CONFIG.player.w,
@@ -131,10 +131,8 @@ function Animation() {
   var chat_size = 18;
   var chat = [
       ["Man: Hello?", 1],
-      // ["|Bowman: Hi there, it's Mr. Bowman here. I finally managed to reach you", 2],
       ["Bowman: Hi there, it's Mr. Bowman here.", 2],
       ["I finally managed to reach you", 2],
-      // ["|Man: Oh Mr. Bowman, we've been looking for you for a whole week, you've been offline!", 1],
       ["Man: Oh Mr. Bowman, we've been looking", 1],
       ["for you for a whole week, you've been offline!", 1],
       ["Bowman: A week? It felts like 2 minutes only", 2],
@@ -204,18 +202,21 @@ function Animation() {
     }
   };
 
-  this.calculations = function () {
+  this.calculations = function (from, to) {
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
 
-    // for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
-    //   AnimationEngine.calculations(this.objects.f[k]);
-    // }
-    // AnimationEngine.calculations(this.objects.player);
-    // AnimationEngine.calculations(this.objects.satellite);
-    // AnimationEngine.calculations(this.objects.earth);
-    //
-    // for (var k = 0; k < this.objects.signal.length; k++) {
-    //   AnimationEngine.calculations(this.objects.signal[k]);
+    for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
+      AnimationEngine.calculations(this.objects.f[k], from, to);
+    }
+    AnimationEngine.calculations(this.objects.player, from, to);
+    AnimationEngine.calculations(this.objects.satellite, from, to);
+    AnimationEngine.calculations(this.objects.earth, from, to);
+
+    for (var k = 0; k < this.objects.signal.length; k++) {
+      AnimationEngine.calculations(this.objects.signal[k], from, to);
+    }
+    // for (var k = 0; k < this.objects.chat.length; k++) {
+    //   AnimationEngine.calculations(this.objects.chat[k], this.seconds, from, to);
     // }
   };
 
