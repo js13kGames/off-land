@@ -509,36 +509,33 @@ function stopSong() {
   audioSong.pause();
 }
 
-var soundPromise = undefined;
 var isSoundPlaying = false;
 
 function playSound(soundType, isLoop) {
   isLoop = (isLoop === true);
   if (isSoundPlaying) {
-    soundPromise.then(function () {
-      playSound(soundType, isLoop);
-    });
-  } else {
-    soundPromise = playSoundInPromise(soundType, isLoop);
+    stopSound();
   }
+  playSoundInPromise(soundType, isLoop);
 }
 
 function playSoundInPromise(soundType, isLoop) {
-  return new Promise(function () { // return a promise
-    audioSounds.preload = "auto";  // intend to play through
-    audioSounds.autoplay = true; // autoplay when loaded
-    audioSounds.loop = isLoop;
-    audioSounds.onerror = function () {
-    };                      // on error, reject
-    audioSounds.onended = function () {
-      isSoundPlaying = false;
-    };                     // when done, resolve
-    audioSounds.src = URL.createObjectURL(
-        new Blob([soundType.wave], {type: "audio/wav"}));
-  });
+  isSoundPlaying = true;
+  audioSounds.preload = "auto";  // intend to play through
+  audioSounds.autoplay = true; // autoplay when loaded
+  audioSounds.loop = isLoop;
+  audioSounds.onerror = function () {
+    isSoundPlaying = false;
+  };                      // on error, reject
+  audioSounds.onended = function () {
+    isSoundPlaying = false;
+  };                     // when done, resolve
+  audioSounds.src = URL.createObjectURL(
+      new Blob([soundType.wave], {type: "audio/wav"}));
 }
 
 function stopSound() {
+  isSoundPlaying = false;
   audioSounds.pause();
 }
 

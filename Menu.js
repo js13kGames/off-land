@@ -1,4 +1,5 @@
 function Menu() {
+  stopSound();
 
   this.calculations = function () {
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
