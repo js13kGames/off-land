@@ -28,8 +28,8 @@ function drawStats() {
       Math.floor(game.life));
   displayText("Life " + life, 25, CONFIG.screen.h - 40);
 
-  // Display Current Level
-  displayText("Level " + level.lvl, 25, CONFIG.screen.h - 20);
+  // Display Current day
+  displayText("Day " + level.lvl, 25, CONFIG.screen.h - 20);
 }
 
 function drawPreGameText(){

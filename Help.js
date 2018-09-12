@@ -10,11 +10,11 @@ function Help() {
     this.pointer = new TextUI(String.fromCharCode(9732), 0, 0);
     pointer = this.pointer;
     this.argument = new TextUI(
-        "Mr. Bowman is lost in the vast Space and completely offline", posH,
+        "Mr. Bowman is lost in the vast Space and completely offline", posH / 1.2,
         verticalPosition(0));
     this.mission = new TextUI(
-        "Collect all the radio transmitter components and find the way back home ",
-        posH / 2,
+        "Collect all the radio transmitter components to restore communication",
+        posH / 1.8,
         verticalPosition(1));
     this.collect = new TextUI("Pick up all components to move to next level",
         posH,

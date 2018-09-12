@@ -128,20 +128,28 @@ function Animation() {
   }
 
   this.objects.chat = [];
-  var chat_size = 20;
+  var chat_size = 18;
   var chat = [
-      ["|Man: Hello?", 1],
-      ["|Bowman: Hi there!", 2],
-      ["|Man: Who is talking?", 1],
-      ["|Bowman: Just Mr. Bowman", 2],
+      ["Man: Hello?", 1],
+      // ["|Bowman: Hi there, it's Mr. Bowman here. I finally managed to reach you", 2],
+      ["Bowman: Hi there, it's Mr. Bowman here.", 2],
+      ["I finally managed to reach you", 2],
+      // ["|Man: Oh Mr. Bowman, we've been looking for you for a whole week, you've been offline!", 1],
+      ["Man: Oh Mr. Bowman, we've been looking", 1],
+      ["for you for a whole week, you've been offline!", 1],
+      ["Bowman: A week? It felts like 2 minutes only", 2],
+      ["Man: Ok Mr. B, send me your current position", 1],
+      ["Bowman: It's X:" + Math.floor(CONFIG.screen.w / 100 * 49) + " Y:"
+      + Math.floor(CONFIG.screen.h / 100 * 76), 2],
+      ["Man: Alright, we'll pick you up...", 1]
   ];
   for (var k = 0; k < chat.length; k++) {
     this.objects.chat.push(new AnimationEngine(
         [],
         {
-          init_x: 10,
-          init_y: 20 + (5 * k),
-          init_time: 14 + k
+          init_x: 5,
+          init_y: 20 + (6 * k),
+          init_time: 14 + (k * 2)
         }
     ));
     this.objects.chat[k].color = chat[k][1] === 1 ? CONFIG.mainColour
@@ -158,12 +166,19 @@ function Animation() {
   this.objects.sounds.push({
     done: false,
     action: function(){
-      playSound(SOUNDSGAME.timeFreeze);
+      playSound(SOUNDSGAME.shield);
     }
   });
   this.objects.sounds.push({
     done: false,
     action: function(){
+      playSound(SOUNDSGAME.signal, true);
+    }
+  });
+  this.objects.sounds.push({
+    done: false,
+    action: function(){
+      stopSound();
       playSound(SOUNDSGAME.shield);
     }
   });
@@ -171,7 +186,8 @@ function Animation() {
     this.seconds += 0.017;
 
     AnimationEngine.execute(this.objects.sounds[0],6, this.seconds);
-    AnimationEngine.execute(this.objects.sounds[1],14, this.seconds);
+    AnimationEngine.execute(this.objects.sounds[1],9, this.seconds);
+    AnimationEngine.execute(this.objects.sounds[2],14, this.seconds);
 
     for (var k = 0; k < LEVEL_CONFIG.levels; k++) {
       AnimationEngine.draw(this.objects.f[k], this.seconds);

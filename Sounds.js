@@ -1,5 +1,5 @@
-function fillEmpty(el, times, last_n){
-  for(var i = 0; i< times; i++){
+function fillEmpty(el, times, last_n) {
+  for (var i = 0; i < times; i++) {
     el.push({
       n: [], f: []
     });
@@ -8,6 +8,7 @@ function fillEmpty(el, times, last_n){
     n: [last_n], f: []
   });
 }
+
 function getSong(speed) {
   return {
     songData: [
@@ -43,23 +44,43 @@ function getSong(speed) {
           4 // FX_DELAY_TIME
         ],
         // Patterns
-        p: [6,2,7],
+        p: [6, 2, 7],
         // Columns
         c: [
-          {n: [147,152,150,154,152,150,149,152,147,152,150,154,152,150,149,152],
-            f: [13,,,,,,,,,,,,,,,,43]},
-          {n: [150,155,153,157,155,153,152,155,150,155,153,157,155,153,152,155],
-            f: []},
-          {n: [145,150,148,152,150,148,147,150,145,150,148,152,150,148,147,150],
-            f: []},
-          {n: [135,,123,,135,,123],
-            f: []},
-          {n: [],
-            f: []},
-          {n: [147,152,150,154,152,150,149,152,147,152,150,154,152,150,149,152],
-            f: [11,13,,,,,,,,,,,,,,,15,35]},
-          {n: [145,150,148,152,150,148,147,150,145,150,148,152,150,148,147,150],
-            f: [11,,13,,11,,,,11,,,,11,,13,,13,,36,,12,,,,9,,,,5,,37]}
+          {
+            n: [147, 152, 150, 154, 152, 150, 149, 152, 147, 152, 150, 154, 152,
+              150, 149, 152],
+            f: [13, , , , , , , , , , , , , , , , 43]
+          },
+          {
+            n: [150, 155, 153, 157, 155, 153, 152, 155, 150, 155, 153, 157, 155,
+              153, 152, 155],
+            f: []
+          },
+          {
+            n: [145, 150, 148, 152, 150, 148, 147, 150, 145, 150, 148, 152, 150,
+              148, 147, 150],
+            f: []
+          },
+          {
+            n: [135, , 123, , 135, , 123],
+            f: []
+          },
+          {
+            n: [],
+            f: []
+          },
+          {
+            n: [147, 152, 150, 154, 152, 150, 149, 152, 147, 152, 150, 154, 152,
+              150, 149, 152],
+            f: [11, 13, , , , , , , , , , , , , , , 15, 35]
+          },
+          {
+            n: [145, 150, 148, 152, 150, 148, 147, 150, 145, 150, 148, 152, 150,
+              148, 147, 150],
+            f: [11, , 13, , 11, , , , 11, , , , 11, , 13, , 13, , 36, ,
+              12, , , , 9, , , , 5, , 37]
+          }
         ]
       },
     ],
@@ -171,6 +192,58 @@ var SOUNDSGAME = {
       rowLen: 5513,   // In sample lengths
       patternLen: 1,  // Rows per pattern
       endPattern: 5,  // End pattern
+      numChannels: 1  // Number of channels
+    },
+    wave: {}
+  },
+  signal: {
+    sound: {
+      songData: [
+        { // Instrument 0
+          i: [
+            0, // OSC1_WAVEFORM
+            255, // OSC1_VOL
+            152, // OSC1_SEMI
+            0, // OSC1_XENV
+            0, // OSC2_WAVEFORM
+            255, // OSC2_VOL
+            152, // OSC2_SEMI
+            12, // OSC2_DETUNE
+            0, // OSC2_XENV
+            0, // NOISE_VOL
+            2, // ENV_ATTACK
+            0, // ENV_SUSTAIN
+            60, // ENV_RELEASE
+            0, // ARP_CHORD
+            0, // ARP_SPEED
+            0, // LFO_WAVEFORM
+            0, // LFO_AMT
+            0, // LFO_FREQ
+            0, // LFO_FX_FREQ
+            2, // FX_FILTER
+            255, // FX_FREQ
+            0, // FX_RESONANCE
+            0, // FX_DIST
+            32, // FX_DRIVE
+            47, // FX_PAN_AMT
+            3, // FX_PAN_FREQ
+            157, // FX_DELAY_AMT
+            2 // FX_DELAY_TIME
+          ],
+          // Patterns
+          p: [32],
+          // Columns
+          c: [
+            {
+              n: [144],
+              f: []
+            }
+          ]
+        },
+      ],
+      rowLen: 1000,   // In sample lengths
+      patternLen: 1,  // Rows per pattern
+      endPattern: 2,  // End pattern
       numChannels: 1  // Number of channels
     },
     wave: {}
@@ -386,6 +459,7 @@ var SOUNDSGAME = {
 };
 
 fillEmpty(SOUNDSGAME.timeFreeze.sound.songData[0].c, 30, 140);
+fillEmpty(SOUNDSGAME.signal.sound.songData[0].c, 30, 140);
 fillEmpty(SOUNDSGAME.lifeUp.sound.songData[0].c, 30, 146);
 fillEmpty(SOUNDSGAME.shield.sound.songData[0].c, 30, 130);
 fillEmpty(SOUNDSGAME.win.sound.songData[0].c, 30, 164);
@@ -399,6 +473,7 @@ function generateAllSounds() {
   generateSound(SOUNDSGAME.shield);
   generateSound(SOUNDSGAME.win);
   generateSound(SOUNDSGAME.lose);
+  generateSound(SOUNDSGAME.signal);
 }
 
 function generateSound(soundType) {
@@ -434,18 +509,37 @@ function stopSong() {
   audioSong.pause();
 }
 
-function playSound(soundType) {
-  //todo: encontrar mejor solucion. El catch no hace nada
-  // var audioSounds = document.createElement("audio");
-  audioSounds.src = URL.createObjectURL(
-      new Blob([soundType.wave], {type: "audio/wav"}));
+var soundPromise = undefined;
+var isSoundPlaying = false;
 
-  audioSounds.autoplay = true;
-  const p = audioSounds.play();
-  if (p && (typeof Promise !== 'undefined') && (p instanceof Promise)) {
-    p.catch(e => e = 0);
+function playSound(soundType, isLoop) {
+  isLoop = (isLoop === true);
+  if (isSoundPlaying) {
+    soundPromise.then(function () {
+      playSound(soundType, isLoop);
+    });
+  } else {
+    soundPromise = playSoundInPromise(soundType, isLoop);
   }
+}
 
+function playSoundInPromise(soundType, isLoop) {
+  return new Promise(function () { // return a promise
+    audioSounds.preload = "auto";  // intend to play through
+    audioSounds.autoplay = true; // autoplay when loaded
+    audioSounds.loop = isLoop;
+    audioSounds.onerror = function () {
+    };                      // on error, reject
+    audioSounds.onended = function () {
+      isSoundPlaying = false;
+    };                     // when done, resolve
+    audioSounds.src = URL.createObjectURL(
+        new Blob([soundType.wave], {type: "audio/wav"}));
+  });
+}
+
+function stopSound() {
+  audioSounds.pause();
 }
 
 var wavesSong = [];

@@ -11,7 +11,7 @@ var CONFIG = {
 
 function reloadConfig(diff) {
   difficulty = diff;
-  var speedCoef = difficulty === 1 ? 1.4 : 3;
+  var speedCoef = difficulty === 1 ? 1.2 : 3;
   var aiQtyCoef = difficulty === 1 ? 1 : 1.3;
   LEVEL_CONFIG = {
     levels: 7,
