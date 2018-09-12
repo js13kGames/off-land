@@ -54,6 +54,3 @@ function TextUI(txt, x, y) {
 function changeResolution(val, change){
   return change > 0 ? val / 100 * change : val;
 }
-function changeRelativeResolution(val, from, to){
-  return change > 0 ? val / 100 * change : val;
-}
