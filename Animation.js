@@ -135,7 +135,7 @@ function Animation() {
       ["I finally managed to reach you", 2],
       ["Man: Oh Mr. Bowman, we've been looking", 1],
       ["for you for a whole week, you've been offline!", 1],
-      ["Bowman: A week? It felts like 2 minutes only", 2],
+      ["Bowman: A week? It felt like 2 minutes only", 2],
       ["Man: Ok Mr. B, send me your current position", 1],
       ["Bowman: It's X:" + Math.floor(CONFIG.screen.w / 100 * 49) + " Y:"
       + Math.floor(CONFIG.screen.h / 100 * 76), 2],
@@ -215,9 +215,6 @@ function Animation() {
     for (var k = 0; k < this.objects.signal.length; k++) {
       AnimationEngine.calculations(this.objects.signal[k], from, to);
     }
-    // for (var k = 0; k < this.objects.chat.length; k++) {
-    //   AnimationEngine.calculations(this.objects.chat[k], this.seconds, from, to);
-    // }
   };
 
   this.calculations();

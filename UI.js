@@ -74,8 +74,8 @@ function textTimes(txt, times) {
 function openFullscreen() {
   if (div.mozRequestFullScreen) { /* Firefox */
     div.mozRequestFullScreen();
-  } else if (div.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-    div.webkitRequestFullscreen();
+  } else if (canvas.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    canvas.webkitRequestFullscreen();
   } else if (div.requestFullscreen) {
     div.requestFullscreen();
   }
