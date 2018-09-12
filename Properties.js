@@ -18,10 +18,10 @@ function reloadConfig(diff) {
     1: {f: 8, s: 2 * speedCoef, a: 7 * aiQtyCoef},
     2: {f: 8, s: 2.5 * speedCoef, a: 8 * aiQtyCoef},
     3: {f: 8, s: 3 * speedCoef, a: 8 * aiQtyCoef},
-    4: {f: 8, s: 4 * speedCoef, a: 9 * aiQtyCoef},
+    4: {f: 8, s: 4.5 * speedCoef, a: 9 * aiQtyCoef},
     5: {f: 8, s: 5 * speedCoef, a: 9 * aiQtyCoef},
-    6: {f: 8, s: 6 * speedCoef, a: 9 * aiQtyCoef},
-    7: {f: 8, s: 7 * speedCoef, a: 10 * aiQtyCoef}
+    6: {f: 8, s: 5.5 * speedCoef, a: 9 * aiQtyCoef},
+    7: {f: 8, s: 6 * speedCoef, a: 10 * aiQtyCoef}
   };
 
   CONFIG = {

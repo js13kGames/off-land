@@ -13,7 +13,7 @@ REM copy minified js into HTML file
 type main.min.js >> index.html
 
 REM add HTML tags in file
-echo ^</script^>^<div^>^<canvas^>^</canvas^>^</div^> >> index.html
+echo ^</script^>^<meta charset="utf-8"/^>^<div^>^<canvas^>^</canvas^>^</div^> >> index.html
 
 REM zip HTML file
 7z a -tzip js13kgame.zip index.html

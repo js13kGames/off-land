@@ -241,7 +241,7 @@ var SOUNDSGAME = {
           ]
         },
       ],
-      rowLen: 3000,   // In sample lengths
+      rowLen: 2000,   // In sample lengths
       patternLen: 1,  // Rows per pattern
       endPattern: 10,  // End pattern
       numChannels: 1  // Number of channels
