@@ -75,10 +75,30 @@ function openFullscreen() {
   if (div.mozRequestFullScreen) { /* Firefox */
     div.mozRequestFullScreen();
   } else if (div.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-    div.webkitRequestFullscreen();
+    var chromeVersion = getChromeVersion() !== undefined
+        ? getChromeVersion().major : -1;
+    if (chromeVersion >= 69) {
+      div.webkitRequestFullscreen();
+    } else {
+      canvas.webkitRequestFullscreen();
+    }
   } else if (div.requestFullscreen) {
     div.requestFullscreen();
   }
+}
+
+function getChromeVersion () {
+  var pieces = navigator.userAgent.match(/Chrom(?:e|ium)\/([0-9]+).([0-9]+).([0-9]+).([0-9]+)/);
+  if (pieces == null || pieces.length != 5) {
+    return undefined;
+  }
+  pieces = pieces.map(piece => parseInt(piece, 10));
+  return {
+    major: pieces[1],
+    minor: pieces[2],
+    build: pieces[3],
+    patch: pieces[4]
+  };
 }
 
 var from;
